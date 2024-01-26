@@ -9,8 +9,8 @@ class Automovil:
     def getAnio(self):
         return self.__anio
     
-    def setAnio(self,anio):
-        self.__anio = anio
+    def setAnio(self,aa):
+        self.__anio = aa
     #metodos
     def encender(self):
         print('encender ' + self.marca)
