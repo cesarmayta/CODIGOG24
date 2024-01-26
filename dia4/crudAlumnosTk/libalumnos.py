@@ -34,22 +34,31 @@ class Alumno:
         btn_insertar.grid(row=4,column=1,columnspan=2)
         
         ### LISTA DE ALUMNOS
-        tree = Treeview(self.app)
-        tree['columns'] = ('Nombre','Email','Celular')
+        self.tree = Treeview(self.app)
+        self.tree['columns'] = ('Nombre','Email','Celular')
 
-        tree.column('#0',width=0,stretch=NO)
-        tree.column('Nombre')
-        tree.column('Email')
-        tree.column('Celular')
+        self.tree.column('#0',width=0,stretch=NO)
+        self.tree.column('Nombre')
+        self.tree.column('Email')
+        self.tree.column('Celular')
 
-        tree.heading('#0',text='id')
-        tree.heading('Nombre',text='Nombre')
-        tree.heading('Email',text='Email')
-        tree.heading('Celular',text='Celular')
+        self.tree.heading('#0',text='id')
+        self.tree.heading('Nombre',text='Nombre')
+        self.tree.heading('Email',text='Email')
+        self.tree.heading('Celular',text='Celular')
 
-        tree.grid(row=5,column=0,pady=20,padx=20)
+        self.tree.grid(row=5,column=0,pady=20,padx=20)
+        
         
     def insertar(self):
-        pass
+        
+        nuevo_alumno = (
+            self.txt_nombre.get(),
+            self.txt_email.get(),
+            self.txt_celular.get()
+        )
+        
+        
+        self.tree.insert('',END,values=nuevo_alumno)
         
     
