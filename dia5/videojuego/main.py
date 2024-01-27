@@ -53,6 +53,29 @@ class Paleta(pygame.sprite.Sprite):
             
         self.rect.move_ip(self.speed)
         
+class Ladrillo(pygame.sprite.Sprite):
+    def __init__(self,position):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load('imagenes/ladrillo.png')
+        self.rect= self.image.get_rect()
+        self.rect.topleft = position
+        
+class Muro(pygame.sprite.Group):
+    def __init__(self,cantidad):
+        pygame.sprite.Group.__init__(self)
+        pos_x = 0
+        pos_y = 20
+        for i in range(cantidad):
+            ladrillo = Ladrillo((pos_x,pos_y))
+            self.add(ladrillo)
+            
+            pos_x += ladrillo.rect.width
+            if pos_x >= ANCHO:
+                pos_x = 0
+                pos_y += ladrillo.rect.height
+                
+            
+        
     
 
 pantalla = pygame.display.set_mode((ANCHO,ALTO))
@@ -61,6 +84,7 @@ pygame.display.set_caption('Mi primer videojuego con python')
 
 bolita = Bolita()
 jugador = Paleta()
+muro = Muro(50)
 
 while True:
     #establecer el tiempo del reloj
@@ -77,5 +101,6 @@ while True:
     pantalla.fill(FONDO)
     pantalla.blit(bolita.image,bolita.rect)
     pantalla.blit(jugador.image,jugador.rect)
+    muro.draw(pantalla)
     #actualizar los objetos en la pantalla
     pygame.display.flip()
