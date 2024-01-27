@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter.ttk import Treeview
+from tkinter import messagebox
 
 class Alumno:
     
@@ -30,8 +31,13 @@ class Alumno:
         self.txt_celular = Entry(frame)
         self.txt_celular.grid(row=3,column=1)
 
+        ### BOTON INSERTAR ###
         btn_insertar = Button(frame,text='Insertar Nuevo Alumno',command=self.insertar)
         btn_insertar.grid(row=4,column=1,columnspan=2)
+        
+        ### BOTON ELIMINAR ###
+        btn_eliminar = Button(frame,text='Eliminar Alumno',command=self.eliminar)
+        btn_eliminar.grid(row=5,column=1,columnspan=2)
         
         ### LISTA DE ALUMNOS
         self.tree = Treeview(self.app)
@@ -57,8 +63,17 @@ class Alumno:
             self.txt_email.get(),
             self.txt_celular.get()
         )
-        
-        
         self.tree.insert('',END,values=nuevo_alumno)
+        
+    def eliminar(self):
+        seleccion = self.tree.selection()
+        if seleccion:
+            for item in seleccion:
+                self.tree.delete(item)
+        else:
+            messagebox.showinfo('Alerta','Por favor selecciona un alumno a eliminar')
+        
+        
+        
         
     
