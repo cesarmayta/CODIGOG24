@@ -13,6 +13,7 @@ opcion = int(input('Ingrese la opción que desee : '))
 if opcion == 1:
     #convertir de soles a dolares
     moneda1 = Moneda()
+    moneda1.obtener_tipocambio()
     moneda1.moneda_origen = 'soles'
     moneda1.moneda_destino = 'dolares'
     moneda1.operacion = '/'

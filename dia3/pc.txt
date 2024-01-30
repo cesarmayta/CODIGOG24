@@ -1,4 +1,0 @@
-=============== INFO DE PC===============
-sistema operativo  : Windows 10.0.19045 
-arquitectura       : AMD64 
-procesador         : Intel64 Family 6 Model 165 Stepping 3, GenuineIntel 
