@@ -1,4 +1,16 @@
 {% extends 'layout.html' %}
 {% block content %}
 <h1>Contactos</h1>
+<div class="row">
+    {% for contacto in contactos %}
+    <div class="col-sm">
+        <div class="card" style="width: 18rem;">
+            <img src="{{contacto.picture['large']}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">{{contacto.name['first']}} {{contacto.name['last']}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
