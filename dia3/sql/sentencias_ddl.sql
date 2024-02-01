@@ -11,4 +11,4 @@ ALTER TABLE contacto
 ADD COLUMN pais VARCHAR(100) DEFAULT 'Perú';
 
 -- ELIMINAR TABLA
-DROP TABLE contacto
+DROP TABLE contacto;
