@@ -13,6 +13,16 @@ print("conectado a la base de datos")
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    cursor = mysql.connection.cursor()
+    sql_alumnos = "select id,nombre,email from alumno"
+    cursor.execute(sql_alumnos)
+    data_alumnos = cursor.fetchall()
+    cursor.close()
+
+    context = {
+        'alumnos':data_alumnos
+    }
+    
+    return render_template('index.html',**context)
 
 app.run(debug=True)
