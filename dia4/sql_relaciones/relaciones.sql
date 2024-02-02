@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS alumno(
     nota DOUBLE DEFAULT 0
 );
 
+ALTER TABLE alumno DROP COLUMN nota;
+
 CREATE TABLE IF NOT EXISTS asistencia(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     alumno_id INT NOT NULL,
@@ -43,3 +45,30 @@ VALUES
 
 
 select * from asistencia;
+
+CREATE TABLE curso(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL
+)
+
+insert into curso(nombre)
+VALUES ('PYTHON'),('JAVASCRIPT'),('MYSQL'),('HTML Y CSS'),('REACT');
+
+select * from curso;
+
+CREATE TABLE alumno_curso(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    curso_id INT NOT NULL,
+    alumno_id INT NOT NULL,
+    nota DOUBLE DEFAULT 0,
+    FOREIGN KEY(curso_id) REFERENCES curso(id),
+    FOREIGN KEY(alumno_id) REFERENCES alumno(id)
+);
+
+insert into alumno_curso(curso_id,alumno_id,nota)
+VALUES
+(1,1,20),(1,2,15),(1,3,11),(1,4,9),(1,5,17),
+(2,1,11),(2,2,10),(2,4,19),(2,5,20),
+(3,1,14),(3,2,13),(3,3,8),(3,4,20),(3,5,17),
+(4,1,9),(4,2,16),(4,3,11),(4,5,20),
+(5,1,19),(5,2,14),(5,3,12),(5,4,15),(5,5,17);
