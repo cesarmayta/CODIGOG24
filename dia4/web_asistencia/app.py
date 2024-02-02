@@ -7,6 +7,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'root'
 app.config['MYSQL_DB'] = 'asistencia'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
 print("conectado a la base de datos")
@@ -19,6 +20,7 @@ def index():
     data_alumnos = cursor.fetchall()
     cursor.close()
 
+    print(data_alumnos)
     context = {
         'alumnos':data_alumnos
     }
