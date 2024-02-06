@@ -56,9 +56,15 @@ def set_tarea():
     mysql.connection.commit()
     cursor.close()
     
+    cursor_data = mysql.connection.cursor()
+    cursor_data.execute('select id,descripcion,estado from tarea order by id desc limit 1')
+    data = cursor_data.fetchall()
+    cursor_data.close()
+    
     context = {
         'status':True,
-        'message':'registro exitoso'
+        'message':'registro exitoso',
+        'content':data[0]
     }
     
     return jsonify(context)
