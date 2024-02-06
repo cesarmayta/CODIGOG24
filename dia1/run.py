@@ -83,6 +83,24 @@ def get_tarea_id(id):
     }
     
     return jsonify(context)
+
+@app.route('/tarea/<id>',methods=['PUT'])
+def update_tarea(id):
+    descripcion = request.json['descripcion']
+    estado = request.json['estado']
+    
+    cursor = mysql.connection.cursor()
+    cursor.execute(f"update tarea set descripcion='{descripcion}',estado='{estado}' where id={id}")
+    mysql.connection.commit()
+    cursor.close()
+    
+    context = {
+        'status':True,
+        'content':'',
+        'message':'registro actualizado'
+    }
+    
+    return jsonify(context)
     
 
 
