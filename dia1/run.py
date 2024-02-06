@@ -101,6 +101,38 @@ def update_tarea(id):
     }
     
     return jsonify(context)
+
+@app.route('/tarea/<id>/status',methods=['PATCH'])
+def update_estado(id):
+    estado = request.json['estado']
+    
+    cursor = mysql.connection.cursor()
+    cursor.execute(f"update tarea set estado='{estado}' where id={id}")
+    mysql.connection.commit()
+    cursor.close()
+    
+    context = {
+        'status':True,
+        'content':'',
+        'message':'estado actualizado'
+    }
+    
+    return jsonify(context)
+
+@app.route('/tarea/<id>',methods=['DELETE'])
+def delete_tarea(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute(f"delete from tarea where id={id}")
+    mysql.connection.commit()
+    cursor.close()
+    
+    context = {
+        'status':True,
+        'content':'',
+        'message':'registro eliminado'
+    }
+    
+    return jsonify(context)
     
 
 
