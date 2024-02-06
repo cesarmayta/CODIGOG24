@@ -46,6 +46,23 @@ def get_tarea():
     }
     
     return jsonify(context)
+
+@app.route('/tarea',methods=['POST'])
+def set_tarea():
+    descripcion = request.json['descripcion']
+    
+    cursor =  mysql.connection.cursor()
+    cursor.execute(f"insert into tarea(descripcion) values('{descripcion}');")
+    mysql.connection.commit()
+    cursor.close()
+    
+    context = {
+        'status':True,
+        'message':'registro exitoso'
+    }
+    
+    return jsonify(context)
+    
     
 
 if __name__ == '__main__':
