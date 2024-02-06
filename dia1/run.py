@@ -14,6 +14,18 @@ mysql = MySQL(app)
 
 @app.route('/')
 def index():
+    cursor = mysql.connection.cursor()
+    cursor.execute("""
+                   CREATE TABLE IF NOT EXITS tarea(
+                       id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                       descripcion VARCHAR(255) NOT NULL,
+                       estado VARCHAR(100) DEFAULT 'pendiente'
+                   );
+                   """)
+    mysql.connection.commit()
+    cursor.close()
+    print('TABLA CREADA!!!')
+    
     context = {
         'status':True,
         'message':'Mi primer api rest con flask'
