@@ -53,6 +53,7 @@ def set_tarea():
     
     cursor =  mysql.connection.cursor()
     cursor.execute(f"insert into tarea(descripcion) values('{descripcion}');")
+    #cursor.execute(f"CALL sp_insertar_tarea('{descripcion}')")
     mysql.connection.commit()
     cursor.close()
     
@@ -68,8 +69,22 @@ def set_tarea():
     }
     
     return jsonify(context)
+
+@app.route('/tarea/<id>')
+def get_tarea_id(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute(f'select id,descripcion,estado from tarea where id={id}')
+    data = cursor.fetchall()
+    cursor.close()
     
+    context = {
+        'status':True,
+        'content':data[0]
+    }
     
+    return jsonify(context)
+    
+
 
 if __name__ == '__main__':
     app.run(debug=True)
