@@ -16,7 +16,7 @@ mysql = MySQL(app)
 def index():
     cursor = mysql.connection.cursor()
     cursor.execute("""
-                   CREATE TABLE IF NOT EXITS tarea(
+                   CREATE TABLE IF NOT EXISTS tarea(
                        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                        descripcion VARCHAR(255) NOT NULL,
                        estado VARCHAR(100) DEFAULT 'pendiente'
@@ -31,6 +31,22 @@ def index():
         'message':'Mi primer api rest con flask'
     }
     return jsonify(context)
+
+@app.route('/tarea')
+def get_tarea():
+    cursor = mysql.connection.cursor()
+    cursor.execute('select id,descripcion,estado from tarea')
+    data = cursor.fetchall()
+    print(data)
+    cursor.close()
+    
+    context = {
+        'status':True,
+        'content':data
+    }
+    
+    return jsonify(context)
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
