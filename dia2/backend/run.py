@@ -1,5 +1,6 @@
 from flask import Flask,jsonify,request
-from flask_sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
 
 app = Flask(__name__)
 
@@ -21,6 +22,12 @@ class Tarea(db.Model):
         self.descripcion = descripcion
         self.estado = estado
 
+# esquemas#
+ma = Marshmallow(app)
+class TareaSchema(ma.Schema):
+    class Meta:
+        fields = ('id','descripcion','estado')
+
 db.create_all()
 print('se creo la tabla tarea en la base de datos')
 
@@ -41,5 +48,19 @@ def set_tarea():
     }
 
     return jsonify(context)
+
+@app.route('/tarea')
+def get_tarea():
+    data = Tarea.query.all() #select id,descripcion,estado from tarea
+    print(data)
+    data_schema = TareaSchema(many=True)
+    
+    context = {
+        'status':True,
+        'content': data_schema.dump(data)
+    }
+    
+    return jsonify(context)
+    
 
 app.run(debug=True)
