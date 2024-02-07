@@ -1,14 +1,24 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Container,Table} from 'react-bootstrap'
+import {Container,Table,Form,Button} from 'react-bootstrap'
 
 class App extends React.Component{
 
     constructor(props){
       super(props)
       this.state = ({
-        tareas:[]
+        tareas:[],
+        descripcion:'',
+        estado:'pendiente'
+      })
+      this.cambioDescripcion = this.cambioDescripcion.bind(this);
+    }
+
+    cambioDescripcion(e){
+      console.log(e.target.value)
+      this.setState({
+        descripcion: e.target.value
       })
     }
 
@@ -29,6 +39,17 @@ class App extends React.Component{
         <div>
           <Container>
             <h1>Lista de Tareas</h1>
+            <Form>
+              <Form.Group className='mb-3'>
+                <Form.Control type="text"
+                value={this.state.descripcion}
+                onChange={this.cambioDescripcion}
+                />
+              </Form.Group>
+              <Button variant='primary' type='submit'>
+                Agregar Tarea
+              </Button>
+            </Form>
             <Table striped bordered hover variant="dark">
               <thead>
                 <tr>
