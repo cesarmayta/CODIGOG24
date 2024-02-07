@@ -13,6 +13,7 @@ class App extends React.Component{
         estado:'pendiente'
       })
       this.cambioDescripcion = this.cambioDescripcion.bind(this);
+      this.guardar = this.guardar.bind(this);
     }
 
     cambioDescripcion(e){
@@ -34,12 +35,35 @@ class App extends React.Component{
       )
     }
 
+    guardar(e){
+      e.preventDefault();
+
+      const dataTarea = {
+        descripcion : this.state.descripcion,
+        estado : this.state.estado
+      }
+
+      axios.post('http://localhost:5000/tarea',dataTarea)
+      .then(res=>{
+        console.log(res.data.content);
+        this.state.tareas.push(res.data.content);
+        var temp = this.state.tareas;
+        this.setState({
+          descripcion:'',
+          tareas:temp
+        }).catch((error)=>{
+          alert(error.toString());
+        })
+
+      })
+    }
+
     render(){
       return(
         <div>
           <Container>
             <h1>Lista de Tareas</h1>
-            <Form>
+            <Form onSubmit={this.guardar}>
               <Form.Group className='mb-3'>
                 <Form.Control type="text"
                 value={this.state.descripcion}
