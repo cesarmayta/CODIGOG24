@@ -42,9 +42,12 @@ def set_tarea():
     db.session.add(nueva_tarea)
     db.session.commit()
     
+    data_schema = TareaSchema()
+    
     context = {
         'status':True,
-        'message':'registro exitoso'
+        'message':'registro exitoso',
+        'content': data_schema.dump(nueva_tarea)
     }
 
     return jsonify(context)
