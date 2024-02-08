@@ -3,7 +3,7 @@ from flask import Blueprint,jsonify
 shop = Blueprint('shop',__name__,url_prefix='/')
 
 from .resources import (
-    categoria
+    categoria,marca
 )
 
 @shop.route('/')
