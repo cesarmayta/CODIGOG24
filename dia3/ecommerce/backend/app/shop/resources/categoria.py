@@ -2,6 +2,7 @@ from flask_restful import Resource,Api
 from flask import request
 
 from .. import shop
+from ..models import Categoria
 
 api = Api(shop)
 
