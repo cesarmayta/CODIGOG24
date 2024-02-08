@@ -22,6 +22,8 @@ class CategoriaResource(Resource):
         return context
     
     def get(self):
+        
+        
         context = {
             'status':True,
             'message':'listado de categorias'
