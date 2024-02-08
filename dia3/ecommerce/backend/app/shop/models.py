@@ -9,6 +9,10 @@ class Categoria(db.Model):
     def __init__(self,nombre):
         self.nombre = nombre
         
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        
 class Marca(db.Model):
     __tablename__ = "tbl_marca"
     
