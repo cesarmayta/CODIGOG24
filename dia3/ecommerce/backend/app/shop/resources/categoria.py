@@ -3,6 +3,7 @@ from flask import request
 
 from .. import shop
 from ..models import Categoria
+from ..schemas import CategoriaSchema
 
 api = Api(shop)
 
@@ -15,18 +16,23 @@ class CategoriaResource(Resource):
         nueva_categoria = Categoria(nombre)
         nueva_categoria.save()
         
+        data_schema = CategoriaSchema()
+        
         context = {
             'status':True,
-            'message':'registro exitoso'
+            'message':'registro exitoso',
+            'content':data_schema.dump(nueva_categoria)
         }
         return context
     
     def get(self):
-        
+        data = Categoria.get_all()
+        data_schema = CategoriaSchema(many=True)
         
         context = {
             'status':True,
-            'message':'listado de categorias'
+            'message':'listado de categorias',
+            'content':data_schema.dump(data)
         }
         
         return context
