@@ -16,9 +16,12 @@ class MarcaResource(Resource):
         marca = Marca(nombre)
         marca.save()
         
+        data_schema = MarcaSchema()
+        
         context = {
             'status':True,
-            'message':'Nuevo registro creado'
+            'message':'Nuevo registro creado',
+            'content':data_schema.dump(marca)
         }    
         
         return context
