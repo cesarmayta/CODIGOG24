@@ -67,6 +67,21 @@ class MarcaDetailResource(Resource):
         }
         
         return context
+    
+    def delete(self,id):
+        
+        marca = Marca.get_by_id(id)
+        marca.delete()
+        
+        data_schema = MarcaSchema()
+        
+        context = {
+            'status':True,
+            'message':'Registro eliminado',
+            'content':data_schema.dump(marca)
+        }
+        
+        return context
         
     
 api.add_resource(MarcaResource,'/marca')
