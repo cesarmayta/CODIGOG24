@@ -51,5 +51,23 @@ class MarcaDetailResource(Resource):
         
         return context
     
+    def put(self,id):
+        data = request.get_json()
+        nombre = data['nombre']
+        
+        marca = Marca.get_by_id(id)
+        marca.nombre = nombre
+        marca.save()
+        
+        data_schema = MarcaSchema()
+        
+        context = {
+            'status':True,
+            'content':data_schema.dump(marca)
+        }
+        
+        return context
+        
+    
 api.add_resource(MarcaResource,'/marca')
 api.add_resource(MarcaDetailResource,'/marca/<id>')
