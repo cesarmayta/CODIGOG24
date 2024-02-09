@@ -26,6 +26,10 @@ class Marca(db.Model):
     def __init__(self,nombre):
         self.nombre = nombre
         
+    @staticmethod
+    def get_all():
+        return Marca.query.all()
+        
     def save(self):
         db.session.add(self)
         db.session.commit()
