@@ -8,6 +8,20 @@ api = Api(shop)
 
 class MarcaResource(Resource):
     
+    def post(self):
+        data = request.get_json()
+        nombre = data['nombre']
+        
+        marca = Marca(nombre)
+        marca.save()
+        
+        context = {
+            'status':True,
+            'message':'Nuevo registro creado'
+        }    
+        
+        return context
+    
     def get(self):
         context = {
             'status':True,

@@ -26,4 +26,8 @@ class Marca(db.Model):
     def __init__(self,nombre):
         self.nombre = nombre
         
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        
         
