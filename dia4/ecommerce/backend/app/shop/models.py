@@ -29,6 +29,10 @@ class Marca(db.Model):
     @staticmethod
     def get_all():
         return Marca.query.all()
+    
+    @staticmethod
+    def get_by_id(id):
+        return Marca.query.get(id)
         
     def save(self):
         db.session.add(self)

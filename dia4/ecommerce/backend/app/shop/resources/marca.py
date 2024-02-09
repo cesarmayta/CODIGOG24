@@ -38,4 +38,18 @@ class MarcaResource(Resource):
         
         return context
     
+class MarcaDetailResource(Resource):
+    
+    def get(self,id):
+        data = Marca.get_by_id(id)
+        data_schema = MarcaSchema()
+        
+        context = {
+            'status':True,
+            'content':data_schema.dump(data)
+        }
+        
+        return context
+    
 api.add_resource(MarcaResource,'/marca')
+api.add_resource(MarcaDetailResource,'/marca/<id>')
