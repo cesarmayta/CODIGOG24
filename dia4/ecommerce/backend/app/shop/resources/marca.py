@@ -3,6 +3,7 @@ from flask import request
 
 from .. import shop
 from ..models import Marca
+from ..schemas import MarcaSchema
 
 api = Api(shop)
 
@@ -23,9 +24,13 @@ class MarcaResource(Resource):
         return context
     
     def get(self):
+        data = Marca.get_all()
+        data_schema = MarcaSchema(many=True)
+        
         context = {
             'status':True,
-            'message':'listado de marcas'
+            'message':'listado de marcas',
+            'content':data_schema.dump(data)
         }
         
         return context
