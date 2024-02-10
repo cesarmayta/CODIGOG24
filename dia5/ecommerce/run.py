@@ -11,4 +11,4 @@ with app.app_context():
 def index():
     return '<h1>api rest</h1>'
     
-app.run(debug=True)
+#app.run(debug=True)

@@ -13,3 +13,11 @@ class Producto(db.Model):
         self.precio = precio
         self.imagen = imagen
         
+    def save(self):
+        if not self.id:
+            db.session.add(self)
+        db.session.commit()
+
+    @staticmethod
+    def get_all():
+        return Producto.query.all()
