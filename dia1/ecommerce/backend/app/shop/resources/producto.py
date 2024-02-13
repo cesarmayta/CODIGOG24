@@ -29,4 +29,28 @@ class ProductoResource(Resource):
 
         return context
 
+    def get(self):
+        data = Producto.get_all()
+        print(data)
+        data_schema = ProductoSchema(many=True)
+        context = {
+            'status':True,
+            'content':data_schema.dump(data)
+        }
+
+        return context
+
+class ProductoDetailResource(Resource):
+
+    def get(self,id):
+        producto = Producto.get_by_id(id)
+        data_schema = ProductoSchema()
+        context = {
+            'status':True,
+            'content':data_schema.dump(producto)
+        }
+        return context
+
+
 api.add_resource(ProductoResource,'/producto')
+api.add_resource(ProductoDetailResource,'/producto/<id>')
