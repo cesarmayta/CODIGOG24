@@ -6,3 +6,4 @@ Flask-migrate
 flask-cors
 mysqlclient
 flask-restful
+python-dotenv
