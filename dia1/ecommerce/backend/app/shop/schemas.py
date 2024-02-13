@@ -3,7 +3,7 @@ from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 
 from .models import(
-    Categoria,Marca
+    Categoria,Marca,Producto
 )
 
 class CategoriaSchema(SQLAlchemyAutoSchema):
@@ -13,3 +13,7 @@ class CategoriaSchema(SQLAlchemyAutoSchema):
 class MarcaSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Marca
+
+class ProductoSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Producto

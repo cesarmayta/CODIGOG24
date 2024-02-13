@@ -62,4 +62,15 @@ class Producto(db.Model):
         self.imagen = imagen
         self.categoria_id = categoria_id
         self.marca_id = marca_id
-        
+
+    @staticmethod
+    def get_all():
+        return Producto.query.all()
+
+    def save(self):
+        if not self.id:
+            db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        pass
