@@ -51,6 +51,29 @@ class ProductoDetailResource(Resource):
         }
         return context
 
+    def put(self,id):
+        data = request.get_json()
+        nombre = data['nombre']
+        precio = data['precio']
+        descripcion = data['descripcion']
+        imagen = data['imagen']
+
+        producto = Producto.get_by_id(id)
+        producto.nombre = nombre
+        producto.precio = precio
+        producto.descripcion = descripcion
+        producto.imagen = imagen
+        producto.save()
+
+        data_schema = ProductoSchema()
+
+        context = {
+            'status':True,
+            'content':data_schema.dump(producto)
+        }
+
+        return context
+
 
 api.add_resource(ProductoResource,'/producto')
 api.add_resource(ProductoDetailResource,'/producto/<id>')
