@@ -74,6 +74,20 @@ class ProductoDetailResource(Resource):
 
         return context
 
+    def delete(self,id):
+        producto = Producto.get_by_id(id)
+        producto.delete()
+
+        data_schema = ProductoSchema()
+
+        context = {
+            'status':True,
+            'message':"Producto Eliminado",
+            'content':data_schema.dump(producto)
+        }
+
+        return context
+
 
 api.add_resource(ProductoResource,'/producto')
 api.add_resource(ProductoDetailResource,'/producto/<id>')
