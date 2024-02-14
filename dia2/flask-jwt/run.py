@@ -1,4 +1,4 @@
-from flask import Flask,jsonify
+from flask import Flask,jsonify,request
 from flask_jwt_extended import (
     JWTManager,
     jwt_required,
@@ -24,5 +24,29 @@ def privado():
         'message':'acceso privado'
     }
     return jsonify(context)
+
+@app.route('/login',methods=['POST'])
+def login():
+    usuario = request.json.get('usuario',None)
+    password = request.json.get('password',None)
+
+    if usuario == 'admin' and password == '123':
+        payload = {
+            'usuario':'cesar',
+            'email':'cesarmayta@gmail.com',
+            'id':1
+        }
+        token = create_access_token(payload)
+        context = {
+            'message':'bienvenido cesar',
+            'content':token
+        }
+    else:
+        context = {
+            'message':'datos invalidos'
+        }
+
+    return jsonify(context)
+
 
 app.run(debug=True)
