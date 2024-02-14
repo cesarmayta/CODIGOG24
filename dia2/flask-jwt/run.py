@@ -1,16 +1,16 @@
-from flask import Flask,jsonify,request
+from flask import Flask,jsonify
 from flask_jwt_extended import (
-    JWTManager,jwt_required
+    JWTManager,
+    jwt_required,
+    create_access_token
 )
 
 app = Flask(__name__)
 
-############## CONFIGURACION DE JWT ###########
-app.config['JWT_SECRET_KEY'] = 'QWERTY1230'
+app.config['JWT_SECRET_KEY'] = 'QWERTY123'
 jwt = JWTManager(app)
-##############################################
 
-@app.route('/publico')
+@app.route('/publico',methods=['GET','POST','PUT','DELETE'])
 def publico():
     context = {
         'message':'acceso publico'
