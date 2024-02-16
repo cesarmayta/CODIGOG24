@@ -34,7 +34,7 @@ class UsuarioResource(Resource):
         return context
 
         
-
+    @jwt_required()
     def get(self):
         context = {
             'status':True,
