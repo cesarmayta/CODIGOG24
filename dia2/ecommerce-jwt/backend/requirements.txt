@@ -7,3 +7,4 @@ flask-cors
 mysqlclient
 flask-restful
 python-dotenv
+flask-jwt-extended
