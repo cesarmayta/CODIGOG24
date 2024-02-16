@@ -2,6 +2,7 @@ from flask_restful import Resource,Api
 from flask import request
 from .. import auth
 from ..models import Usuario
+from ..schemas import UsuarioSchema
 
 from werkzeug.security import(
     generate_password_hash,
@@ -26,9 +27,12 @@ class UsuarioResource(Resource):
         usuario.password = password_hash
         usuario.save()
 
+        data_schema = UsuarioSchema()
+
         context = {
             'status':True,
-            'message':'usuario registrado'
+            'message':'usuario registrado',
+            'content':data_schema.dump(usuario)
         }
 
         return context
@@ -36,9 +40,12 @@ class UsuarioResource(Resource):
         
     @jwt_required()
     def get(self):
+        data = Usuario.get_all()
+        data_schema = UsuarioSchema(many=True)
         context = {
             'status':True,
-            'message':'listado de usuarios'
+            'message':'listado de usuarios',
+            'content':data_schema.dump(data)
         }
         return context
 
