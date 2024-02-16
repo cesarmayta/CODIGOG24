@@ -7,6 +7,7 @@ const Login = () =>{
         email:'',
         password:''
     })
+    const [errorMessage,setErrorMessage] = useState('')
     const navigate = useNavigate()
 
     const handlerInputChange = (e) =>{
@@ -28,6 +29,7 @@ const Login = () =>{
                     navigate('/')
                 }else{
                     console.log(res.message)
+                    setErrorMessage(res.message)
                 }
             })
         }catch{
@@ -80,6 +82,13 @@ const Login = () =>{
                                                 <div className="mb-3 text-center">
                                                     <button className="btn btn-primary btn-block" type="submit"> Sign In </button>
                                                 </div>
+                                                {errorMessage !== '' && (
+                                                    <div className='alert alert-danger'>
+                                                        {errorMessage}
+                                                    </div>
+                                                )
+                                                }
+                                                
                                             </form>
                                         </div>
                                         
