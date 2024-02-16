@@ -1,6 +1,40 @@
-import { Logolight } from "../entryfiles/imagePath"
+import UsuarioService from '../services/Usuario.services'
+import {useNavigate} from 'react-router-dom'
+import {useState} from 'react'
 
 const Login = () =>{
+    const [userCredentials,setUserCredentials] = useState({
+        email:'',
+        password:''
+    })
+    const navigate = useNavigate()
+
+    const handlerInputChange = (e) =>{
+        const {name,value} = e.currentTarget
+        setUserCredentials({
+            ...userCredentials,
+            [name]:value
+        })
+    }
+
+    const handlerLogin = (e) =>{
+        e.preventDefault()
+        try{
+            UsuarioService.login(userCredentials)
+            .then(res=>{
+                console.log(res);
+                if(res.status === true){
+                    localStorage.setItem('token',res.content)
+                    navigate('/')
+                }else{
+                    console.log(res.message)
+                }
+            })
+        }catch{
+            console.log("error")
+        }
+    }
+
     return(
         <>
             <div className="container">
@@ -17,15 +51,24 @@ const Login = () =>{
                                                     <span>LOGIN</span>
                                                 </a>
                                             </div>
-                                            <form action="mt-3" className="p-2">
+                                            <form action="mt-3" className="p-2" onSubmit={handlerLogin}>
                                                 <div className="form-group">
                                                     <label for="emailaddress">Email address</label>
-                                                    <input className="form-control" type="email" id="emailaddress" required="" placeholder="john@deo.com"/>
+                                                    <input className="form-control" type="email" 
+                                                    id="emailaddress" 
+                                                    required="" placeholder="john@deo.com"
+                                                    name="email"
+                                                    onChange={handlerInputChange}
+                                                    />
                                                 </div>
                                                 <div className="form-group">
                                                     <a href="pages-recoverpw.html" className="text-muted float-right">Forgot your password?</a>
                                                     <label for="password">Password</label>
-                                                    <input className="form-control" type="password" required="" id="password" placeholder="Enter your password"/>
+                                                    <input className="form-control" type="password"
+                                                    required="" id="password" placeholder="Enter your password"
+                                                    name="password"
+                                                    onChange={handlerInputChange}
+                                                    />
                                                 </div>
             
                                                 <div className="form-group mb-4 pb-3">
