@@ -12,15 +12,16 @@ export const Search = () => {
 
   useEffect(() => {
     getAllProducts().then((response) => {
-      handleProductsList("products", response);
-      setProductsFiltered(response);
+      console.log(response.data.content)
+      handleProductsList("products", response.data.content);
+      setProductsFiltered(response.data.content);
     });
   }, []);
 
   const updateProductsList = (route, preferencia_id) => {
     getAllProducts(preferencia_id)
       .then((response) => {
-        handleProductsList("products", response);
+        handleProductsList("products", response.data.content);
       })
       .catch((error) => {
         console.log(error);

@@ -29,7 +29,7 @@ export const Products = () => {
       const token = getToken();
       const response = await getAllCategories(token);
       if (response.status === 200) {
-        setListOfCategories(response.data.data);
+        setListOfCategories(response.data.content);
       }
     };
     fetchData();
@@ -40,7 +40,7 @@ export const Products = () => {
     const fetchData = async () => {
       const token = getToken();
       const response = await getAllProducts(token);
-      setListOfProducts(response.data.data);
+      setListOfProducts(response.data.content);
     };
     fetchData();
   }, [bandera]);
@@ -112,17 +112,17 @@ export const Products = () => {
             {listOfProducts.length > 0 &&
               listOfProducts.map((product) => (
                 <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product.description}</td>
-                  <td>S/ {product.price}</td>
+                  <td>{product.nombre}</td>
+                  <td>{product.descripcion}</td>
+                  <td>S/ {product.precio}</td>
                   <td>
                     <img
-                      src={product.image}
+                      src={product.imagen}
                       alt="Product Preview"
                       loading={"lazy"}
                     />
                   </td>
-                  <td>{product.stock}</td>
+                  <td>{product.precio}</td>
                   <td>
                     <button>
                       Details

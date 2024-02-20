@@ -28,8 +28,8 @@ export const PublicLogin = ({
   const createUser = async (e) => {
     e.preventDefault();
     const response = await signIn(userCredentials);
-    if (response.status === 200) {
-      localStorage.setItem("token", response.data.access_token);
+    if (response.status === 201) {
+      localStorage.setItem("token", response.data.content);
       setAuthentication({
         ...authentication,
         isAuthenticated: true,

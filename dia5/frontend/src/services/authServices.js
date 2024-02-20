@@ -1,12 +1,17 @@
 import { API_URL } from "../lib/Enviroments";
 
 export const signIn = async (user) => {
+  const usuario = {
+    email:user.username,
+    password:user.password
+  }
+  console.log(usuario);
   const response = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(user),
+    body: JSON.stringify(usuario),
   });
   const data = await response.json();
   const status = response.status;

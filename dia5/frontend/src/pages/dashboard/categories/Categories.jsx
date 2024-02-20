@@ -25,7 +25,7 @@ export const Categories = () => {
       const token = getToken();
       const response = await getAllCategories(token);
       if (response.status === 200) {
-        setListOfCategories(response.data.data);
+        setListOfCategories(response.data.content);
       }
     };
     fetchData();
@@ -85,7 +85,7 @@ export const Categories = () => {
               listOfCategories.map((category, index) => (
                 <tr key={category.id}>
                   <td>{index + 1}</td>
-                  <td>{category.name}</td>
+                  <td>{category.nombre}</td>
                   <td>
                     <FaTrashAlt onClick={() => deleteCategory(category.id)} />
                   </td>
