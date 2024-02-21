@@ -8,12 +8,12 @@ CORS(app)
 
 app.app_context().push()
 
-db = SQLAlchemy()
+
 #mysql://usuario:password@host/basedatos
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/db_todolist'
 app.config['SQLACHEMY_TRACK_MODIFICATIONS'] = False
 
-db.init_app(app)
+db = SQLAlchemy(app)
 
 ### creando tabla con el ORM ###
 class Tarea(db.Model):
