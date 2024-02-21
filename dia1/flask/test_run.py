@@ -47,3 +47,16 @@ class TestTareaEndpoints:
         response = client.get(f'/tarea/{tarea.id}')
         assert response.status_code == 200
         assert b'tarea 1' in response.data
+
+    def test_update_tarea(self,client):
+        tarea = Tarea(descripcion='tarea 1',estado = 'pendiente')
+        db.session.add(tarea)
+        db.session.commit()
+
+        update_data = {
+            'descripcion': 'modificar tarea 1',
+            'estado': 'terminada'
+        }
+        response = client.put(f'/tarea/{tarea.id}',json=update_data)
+        assert response.status_code == 200
+        assert b'modificar tarea 1' in response.data
