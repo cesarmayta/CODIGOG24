@@ -33,6 +33,12 @@ class TareaSchema(ma.Schema):
 db.create_all()
 print('se creo la tabla tarea en la base de datos')
 
+@app.route('/')
+def index():
+    context = {
+        'message':'prueba flask'
+    }
+    return jsonify(context)
 
 @app.route('/tarea',methods=['POST'])
 def set_tarea():
