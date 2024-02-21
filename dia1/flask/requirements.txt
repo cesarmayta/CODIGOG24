@@ -5,3 +5,4 @@ marshmallow-sqlalchemy
 mysqlclient
 flask-cors
 pytest
+pytest-flask

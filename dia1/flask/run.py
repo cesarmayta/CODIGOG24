@@ -8,11 +8,12 @@ CORS(app)
 
 app.app_context().push()
 
+db = SQLAlchemy()
 #mysql://usuario:password@host/basedatos
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/db_todolist'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/db_todolist'
 app.config['SQLACHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+db.init_app(app)
 
 ### creando tabla con el ORM ###
 class Tarea(db.Model):
@@ -120,4 +121,5 @@ def delete_tarea(id):
     return jsonify(context)
     
     
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
