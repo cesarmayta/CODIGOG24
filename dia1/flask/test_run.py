@@ -1,5 +1,5 @@
 import pytest
-from run import app,db
+from run import app,db,Tarea
 
 @pytest.fixture
 def client():
@@ -27,5 +27,14 @@ class TestTareaEndpoints:
             'estado':'pendiente'
         }
         response = client.post('/tarea',json=tarea_data)
+        assert response.status_code == 200
+        assert b'tarea 1' in response.data
+
+    def test_get_tarea(self,client):
+        tarea = Tarea(descripcion='tarea 1',estado = 'pendiente')
+        db.session.add(tarea)
+        db.session.commit()
+
+        response = client.get('/tarea')
         assert response.status_code == 200
         assert b'tarea 1' in response.data
