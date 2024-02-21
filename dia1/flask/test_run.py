@@ -38,3 +38,12 @@ class TestTareaEndpoints:
         response = client.get('/tarea')
         assert response.status_code == 200
         assert b'tarea 1' in response.data
+
+    def test_get_tarea_id(self,client):
+        tarea = Tarea(descripcion='tarea 1',estado='pendiente')
+        db.session.add(tarea)
+        db.session.commit()
+
+        response = client.get(f'/tarea/{tarea.id}')
+        assert response.status_code == 200
+        assert b'tarea 1' in response.data
