@@ -29,9 +29,25 @@ def api(request):
 
     return JsonResponse(context)
 
+def saludo(request):
+    nombre = request.GET['nombre']
+    return HttpResponse(f'<h1> Hola {nombre}</h1>')
+
+def sumar(request,n1,n2):
+    resultado = n1 + n2
+    return HttpResponse(f'la suma de {n1} + {n2} es {resultado}')
+
+
+def calculadora(request,ope,n1,n2):
+    """
+    implementar una ruta que pueda sumar,restar y multiplicar 2 números dependiendo de la operación
+    """
+    pass
 
 urlpatterns = [
     path('',index),
     path('api',api),
+    path('sumar/<int:n1>/<int:n2>',sumar),
+    path('saludo',saludo),
     path('admin/', admin.site.urls),
 ]
