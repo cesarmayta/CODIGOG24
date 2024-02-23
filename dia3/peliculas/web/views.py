@@ -1,5 +1,13 @@
 from django.shortcuts import render
 
+from .models import Pelicula
+
 # Create your views here.
 def index(request):
-    return render(request,'index.html')
+    lista_peliculas = Pelicula.objects.all()
+    print(lista_peliculas)
+    context = {
+        'peliculas':lista_peliculas
+    }
+
+    return render(request,'index.html',context)
