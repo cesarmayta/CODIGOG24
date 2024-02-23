@@ -7,3 +7,6 @@ pip install django==4.2
 django-admin startproject nombre_proyecto
 cd proyecto
 python manage.py runserver
+
+# comando para crear un app
+python manage.py startapp peliculas

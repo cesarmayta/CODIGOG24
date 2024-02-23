@@ -43,10 +43,13 @@ def calculadora(request,ope,n1,n2):
     else:
         return HttpResponse('no se encontro la operación solicitada')
 
+from peliculas.views import peliculas
+
 urlpatterns = [
     path('',index),
     path('saludo',saludo),
     path('calculadora/<ope>/<int:n1>/<int:n2>',calculadora),
     path('sumar/<int:n1>/<int:n2>',sumar),
+    path('peliculas',peliculas),
     path('admin/', admin.site.urls),
 ]
