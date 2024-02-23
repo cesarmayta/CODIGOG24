@@ -30,9 +30,23 @@ def sumar(request,n1,n2):
     resultado = n1 + n2
     return HttpResponse(f'la suma de {n1} y {n2} es {resultado}')
 
+def calculadora(request,ope,n1,n2):
+    if(ope=="suma"):
+        resultado = n1 + n2
+        return HttpResponse(f'la suma de {n1} + {n2} es {resultado}')
+    elif(ope == "resta"):
+        resultado = n1 - n2
+        return HttpResponse(f'la resta de {n1} - {n2} es {resultado}')
+    elif(ope == "multiplicacion"):
+        resultado = n1 * n2
+        return HttpResponse(f'la suma de {n1} x {n2} es {resultado}')
+    else:
+        return HttpResponse('no se encontro la operación solicitada')
+
 urlpatterns = [
     path('',index),
     path('saludo',saludo),
+    path('calculadora/<ope>/<int:n1>/<int:n2>',calculadora),
     path('sumar/<int:n1>/<int:n2>',sumar),
     path('admin/', admin.site.urls),
 ]
