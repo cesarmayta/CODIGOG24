@@ -16,7 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.http import HttpResponse
+
+
+def index(request):
+    return HttpResponse('<h1>mi pagina web</h1>')
+
+def saludo(request):
+    nombre = request.GET['nombre']
+    return HttpResponse(f'hola {nombre}')
+
+def sumar(request,n1,n2):
+    resultado = n1 + n2
+    return HttpResponse(f'la suma de {n1} y {n2} es {resultado}')
 
 urlpatterns = [
+    path('',index),
+    path('saludo',saludo),
+    path('sumar/<int:n1>/<int:n2>',sumar),
     path('admin/', admin.site.urls),
 ]
