@@ -10,3 +10,11 @@ python manage.py runserver
 
 # comando para crear un app
 python manage.py startapp web
+
+#comandos para hacer migraciones
+
+python manage.py makemigrations
+python manage.py migrate
+
+# comando para crear un usuario administrador
+python manage.py createsuperuser
