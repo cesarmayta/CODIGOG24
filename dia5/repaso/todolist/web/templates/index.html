@@ -42,7 +42,11 @@
                             <td>{{tarea.descripcion}}</td>
                             <td>{{tarea.fecha_creacion}}</td>
                             <td>{{tarea.estado}}</td>
-                            <td><a href="/editar/{{tarea.id}}" class="btn btn-primary">Editar</a></td>
+                            <td>
+                                <a href="/editar/{{tarea.id}}" class="btn btn-success">Editar</a>
+                                <a href="/eliminar/{{tarea.id}}" class="btn btn-danger">Eliminar</a>
+                            
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
