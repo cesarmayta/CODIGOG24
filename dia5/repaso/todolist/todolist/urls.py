@@ -24,5 +24,6 @@ urlpatterns = [
     path('editar/<int:id>',views.editar_tarea),
     path('eliminar/<int:id>',views.eliminar_tarea),
     path('completar/<int:id>',views.completar_tarea),
+    path('toogle_estado_tarea/<int:id>',views.toogle_estado_tarea),
     path('admin/', admin.site.urls),
 ]
