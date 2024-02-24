@@ -23,5 +23,6 @@ urlpatterns = [
     path('',views.index),
     path('editar/<int:id>',views.editar_tarea),
     path('eliminar/<int:id>',views.eliminar_tarea),
+    path('completar/<int:id>',views.completar_tarea),
     path('admin/', admin.site.urls),
 ]

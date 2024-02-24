@@ -31,8 +31,14 @@ def editar_tarea(request,id):
     }
     return render(request,'index.html',context)
 
+
 def eliminar_tarea(request,id):
     tarea = Tarea.objects.get(pk=id)
     tarea.delete()
     return redirect('/')
     
+def completar_tarea(request,id):
+    tarea = Tarea.objects.get(pk=id)
+    tarea.estado = 'completado'
+    tarea.save()
+    return redirect('/')
