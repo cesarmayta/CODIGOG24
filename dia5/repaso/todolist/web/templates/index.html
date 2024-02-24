@@ -42,11 +42,19 @@
                             <th scope="row">{{forloop.counter}}</th>
                             <td>{{tarea.descripcion}}</td>
                             <td>{{tarea.fecha_creacion}}</td>
-                            <td>{{tarea.estado}}</td>
+                            <td><div id="estado_{{tarea.id}}">{{tarea.estado}}</div></td>
                             <td>
-                                <button onclick="toogleEstadoTarea({{tarea.id}})" id="toogle_button" class="btn btn-warning">
-                                    {{tarea.estado}}
-                                </button>
+                                {% if tarea.estado == 'pendiente' %}
+                                    <button onclick="toogleEstadoTarea({{tarea.id}})" 
+                                        id="toogle_button_{{tarea.id}}" class="btn btn-warning">
+                                        Completar Tarea
+                                    </button>
+                                {% else %}
+                                    <button onclick="toogleEstadoTarea({{tarea.id}})" 
+                                        id="toogle_button_{{tarea.id}}" class="btn btn-info">
+                                        Volver a Pendiente
+                                    </button>
+                                {% endif %}
                                 <a href="/editar/{{tarea.id}}" class="btn btn-success">Editar</a>
                                 <a href="/eliminar/{{tarea.id}}" class="btn btn-danger">Eliminar</a>
                             </td>
@@ -70,6 +78,17 @@
             .then(data=>{
                 const estado = data.estado;
                 console.log("estado : ",estado)
+                const button = document.querySelector(`#toogle_button_${id}`);
+                const columna_estado = document.getElementById(`estado_${id}`);
+                columna_estado.innerText = estado
+                if(estado == 'pendiente'){
+                    button.className = 'btn btn-warning'
+                    button.textContent = 'Completar Tarea'
+                    
+                }else{
+                    button.className = 'btn btn-info'
+                    button.textContent = 'Volver a Pendiente'
+                }
             })
             .catch(error => console.log('error : ',error))
         }
