@@ -21,5 +21,6 @@ from web import views
 
 urlpatterns = [
     path('',views.index),
+    path('editar/<int:id>',views.editar_tarea),
     path('admin/', admin.site.urls),
 ]
