@@ -1,4 +1,6 @@
 from django.contrib import admin
+from ckeditor.widgets import CKEditorWidget
+from django.db import models
 
 # Register your models here.
 from .models import (
@@ -13,6 +15,10 @@ admin.site.register(Marca)
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ('nombre','categoria','marca','precio')
     list_filter = ('categoria','marca')
+    
+    formfield_overrides = {
+        models.TextField :{'widget':CKEditorWidget},
+    }
     
 from django.utils.html import format_html
 
