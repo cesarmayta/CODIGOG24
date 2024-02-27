@@ -26,7 +26,7 @@ class Producto(models.Model):
     marca = models.ForeignKey(Marca,on_delete=models.RESTRICT)
     nombre = models.CharField(max_length=255)
     descripcion = models.TextField(null=True)
-    precio = models.DecimalField(max_digits=5,decimal_places=2)
+    precio = models.DecimalField(max_digits=10,decimal_places=2)
     fecha_registro = models.DateTimeField(auto_now=True)
     
     class Meta:

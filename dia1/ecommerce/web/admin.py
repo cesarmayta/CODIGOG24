@@ -7,4 +7,7 @@ from .models import (
 
 admin.site.register(Categoria)
 admin.site.register(Marca)
-admin.site.register(Producto)
+#admin.site.register(Producto)
+@admin.register(Producto)
+class ProductoAdmin(admin.ModelAdmin):
+    list_display = ('nombre','categoria','marca','precio')
