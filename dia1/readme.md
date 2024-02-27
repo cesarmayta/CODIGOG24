@@ -10,3 +10,7 @@ pip install -r requirements.txt
 django-admin startproject ecommerce
 cd ecommerce
 python manage.py startapp web
+
+#comandos para migraciones
+python manage.py makemigrations
+python manage.py migrate
