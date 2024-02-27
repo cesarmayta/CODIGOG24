@@ -12,6 +12,7 @@ admin.site.register(Marca)
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ('nombre','categoria','marca','precio')
+    list_filter = ('categoria','marca')
     
 from django.utils.html import format_html
 
@@ -21,6 +22,7 @@ class ProductoImagenAdmin(admin.ModelAdmin):
     def imagen_html(self,obj):
         return format_html('<img src="{}" width=150px />'.format(obj.imagen.url))
     
-    imagen_html.short_description = 'Image'
+    imagen_html.short_description = 'Imagen'
     
-    list_display = ('producto','imagen_html')
+    list_display = ('orden','producto','imagen_html')
+    search_fields = ['producto__nombre']
