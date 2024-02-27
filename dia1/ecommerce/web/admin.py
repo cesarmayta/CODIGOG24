@@ -13,4 +13,14 @@ admin.site.register(Marca)
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ('nombre','categoria','marca','precio')
     
-admin.site.register(ProductoImagen)
+from django.utils.html import format_html
+
+@admin.register(ProductoImagen)
+class ProductoImagenAdmin(admin.ModelAdmin):
+    
+    def imagen_html(self,obj):
+        return format_html('<img src="{}" width=150px />'.format(obj.imagen.url))
+    
+    imagen_html.short_description = 'Image'
+    
+    list_display = ('producto','imagen_html')
