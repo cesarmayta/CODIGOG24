@@ -9,7 +9,13 @@ from .models import (
 def index(request):
     lista_categorias = Categoria.objects.all()
     lista_marcas = Marca.objects.all()
-    lista_productos = Producto.objects.all()
+    
+    categoria_id = request.GET.get('cat')
+    if categoria_id:
+        categoria_seleccionada = Categoria.objects.get(pk=categoria_id)
+        lista_productos = Producto.objects.filter(categoria=categoria_seleccionada)
+    else:
+        lista_productos = Producto.objects.all()
     
     context = {
         'categorias':lista_categorias,
