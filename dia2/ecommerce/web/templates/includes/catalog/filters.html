@@ -9,6 +9,10 @@
                     <h3 class="widgettitle">Categorias</h3>
                     <div class="section-sb-current">
                         <ul class="section-sb-list">
+                            <li>
+                                <a href="/"><span class="section-sb-label">Todas 
+                                <span class="count">{{productos.count}}</span></span></a>
+                            </li>
                             {% for categoria in categorias %}
                             <li>
                                 <a href="/?cat={{categoria.id}}"><span class="section-sb-label">{{categoria.nombre}} 
@@ -21,6 +25,10 @@
                 <div class="blog-sb-widget multishopbrands_widget">
                     <h3 class="widgettitle">Marcas</h3>
                     <ul class="brands-list-sb">
+                        <li>
+                            <a href="/"><span class="section-sb-label">Todas 
+                            <span class="count">{{productos.count}}</span></span></a>
+                        </li>
                         {% for marca in marcas %}
                         <li>
                             <a href="/?mar={{marca.id}}">{{marca.nombre}} 

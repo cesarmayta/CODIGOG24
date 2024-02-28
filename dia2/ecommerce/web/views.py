@@ -27,3 +27,10 @@ def index(request):
         'productos':lista_productos
     }
     return render(request,'index.html',context)
+
+def producto(request,producto_id):
+    obj_producto = Producto.objects.get(pk=producto_id)
+    context = {
+        'producto':obj_producto
+    }
+    return render(request,'producto.html',context)
