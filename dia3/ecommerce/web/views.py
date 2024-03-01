@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 from .models import (
     Categoria,Marca,Producto,
@@ -53,7 +53,8 @@ def agregar_carrito(request,producto_id):
     carrito = Cart(request)
     carrito.add(obj_producto,cantidad,producto_imagenes[0].imagen.url)
     
-    print(request.session.get('cart'))
+    if request.method == 'GET':
+        return redirect('/')
     
     return render(request,'carrito.html')
 
@@ -61,6 +62,9 @@ def eliminar_carrito(request,producto_id):
     obj_producto = Producto.objects.get(pk=producto_id)
     carrito = Cart(request)
     carrito.delete(obj_producto)
+    
+    if request.GET.get('hd') == '1':
+        return redirect('/')
     
     return render(request,'carrito.html')
 
