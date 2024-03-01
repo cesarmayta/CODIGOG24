@@ -28,7 +28,12 @@ class Cart:
                     value['subtotal'] = str(float(value['cantidad']) * float(value['precio']))
                     break           
             
-        self.save()        
+        self.save()
+        
+    def delete(self,producto):
+        if str(producto.id) in self.cart:
+            del self.cart[str(producto.id)]
+            self.save()     
     
     def save(self):
         self.session['cart'] = self.cart
