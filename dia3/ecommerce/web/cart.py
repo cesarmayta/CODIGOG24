@@ -33,8 +33,13 @@ class Cart:
     def delete(self,producto):
         if str(producto.id) in self.cart:
             del self.cart[str(producto.id)]
-            self.save()     
+            self.save()  
+            
+    def clear(self):
+        self.session['cart'] = {}   
     
     def save(self):
         self.session['cart'] = self.cart
         self.session.modified = True
+        
+    
