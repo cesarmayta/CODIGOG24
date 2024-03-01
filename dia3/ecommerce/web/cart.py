@@ -9,13 +9,13 @@ class Cart:
             
         self.cart = cart
         
-    def add(self,producto,cantidad):
+    def add(self,producto,cantidad,imagen_url):
         self.cart[producto.id] = {
             'producto_id':producto.id,
             'nombre':producto.nombre,
             'cantidad':cantidad,
             'precio':str(producto.precio),
-            'imagen':producto.imagen.url,
+            'imagen':imagen_url,
             'categoria':producto.categoria.nombre,
             'marca':producto.marca.nombre,
             'subtotal':str(cantidad * producto.precio)

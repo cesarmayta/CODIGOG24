@@ -36,5 +36,19 @@ def producto(request,producto_id):
     return render(request,'producto.html',context)
 
 ########### CARRITO DE COMPRAS ############################
+from .cart import Cart
+
 def carrito(request):
+    return render(request,'carrito.html')
+
+def agregar_carrito(request,producto_id):
+    cantidad = 1
+    obj_producto = Producto.objects.get(pk=producto_id)
+    producto_imagenes = ProductoImagen.objects.filter(producto=obj_producto)
+    print(producto_imagenes[0])
+    carrito = Cart(request)
+    carrito.add(obj_producto,cantidad,producto_imagenes[0].imagen.url)
+    
+    print(request.session.get('cart'))
+    
     return render(request,'carrito.html')

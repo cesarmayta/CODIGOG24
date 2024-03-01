@@ -7,5 +7,6 @@ app_name='web'
 urlpatterns = [
     path('',views.index,name='index'),
     path('producto/<int:producto_id>',views.producto,name='producto'),
-    path('carrito',views.carrito,name='carrito')
+    path('carrito',views.carrito,name='carrito'),
+    path('carrito/add/<int:producto_id>',views.agregar_carrito,name='agregarcarrito')
 ]
