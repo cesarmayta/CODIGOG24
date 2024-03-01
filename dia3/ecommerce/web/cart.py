@@ -10,15 +10,26 @@ class Cart:
         self.cart = cart
         
     def add(self,producto,cantidad,imagen_url):
-        self.cart[producto.id] = {
-            'producto_id':producto.id,
-            'nombre':producto.nombre,
-            'cantidad':cantidad,
-            'precio':str(producto.precio),
-            'imagen':imagen_url,
-            'categoria':producto.categoria.nombre,
-            'marca':producto.marca.nombre,
-            'subtotal':str(cantidad * producto.precio)
-        }
+        if (str(producto.id) not in self.cart.keys()):
+            self.cart[producto.id] = {
+                'producto_id':producto.id,
+                'nombre':producto.nombre,
+                'cantidad':cantidad,
+                'precio':str(producto.precio),
+                'imagen':imagen_url,
+                'categoria':producto.categoria.nombre,
+                'marca':producto.marca.nombre,
+                'subtotal':str(cantidad * producto.precio)
+            }
+        else:
+            for key,value in self.cart.items():
+                if key == str(producto.id):
+                    value['cantidad'] = value['cantidad']  + cantidad
+                    value['subtotal'] = str(float(value['cantidad']) * float(value['precio']))
+                    break           
+            
+        self.save()        
+    
+    def save(self):
         self.session['cart'] = self.cart
         self.session.modified = True
