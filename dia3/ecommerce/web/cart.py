@@ -4,10 +4,13 @@ class Cart:
         self.request = request
         self.session = request.session
         cart = self.session.get('cart')
+        total = self.session.get('cart_total')
         if not cart:
             cart = self.session['cart'] = {}
+            total = self.session['cart_total'] = 0
             
         self.cart = cart
+        self.total = float(total)
         
     def add(self,producto,cantidad,imagen_url):
         if (str(producto.id) not in self.cart.keys()):
@@ -36,9 +39,15 @@ class Cart:
             self.save()  
             
     def clear(self):
-        self.session['cart'] = {}   
+        self.session['cart'] = {}
+        self.session['cart_total'] = 0   
     
     def save(self):
+        total = 0
+        for key,value in self.cart.items():
+            total += float(value['subtotal'])
+            
+        self.session['cart_total'] = total
         self.session['cart'] = self.cart
         self.session.modified = True
         
