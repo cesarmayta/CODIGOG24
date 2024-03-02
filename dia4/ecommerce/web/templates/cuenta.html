@@ -8,9 +8,12 @@
         <div class="auth-wrap">
             <div class="auth-col">
                 <h2>Datos Personales</h2>
-                <form method="POST" action="">
+                <form method="POST" action="/cliente/update">
                     {% csrf_token %}
                     {{frm_cliente|crispy}}
+                    <p class="auth-submit">
+                        <input type="submit" value="Actualizar Datos"/>
+                    </p>
                 </form>
             </div>
         </div>

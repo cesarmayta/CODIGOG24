@@ -126,3 +126,33 @@ def cuenta_usuario(request):
         'frm_cliente':form_cliente
     }
     return render(request,'cuenta.html',context)
+
+def actualizar_cliente(request):
+    if request.method == "POST":
+        frm_cliente = ClienteForm(request.POST)
+        if frm_cliente.is_valid():
+            data = frm_cliente.cleaned_data
+            
+            #actualizamos usuario
+            obj_usuario = User.objects.get(pk=request.user.id)
+            obj_usuario.first_name = data['nombre']
+            obj_usuario.last_name = data['apellidos']
+            obj_usuario.email = data['email']
+            obj_usuario.save()
+            
+            try:
+                obj_cliente = Cliente.objects.get(usuario=obj_usuario)
+            except:
+                obj_cliente = Cliente()
+                obj_cliente.usuario = obj_usuario
+                
+            obj_cliente.dni = data['dni']
+            obj_cliente.direccion = data['direccion']
+            obj_cliente.telefono = data['telefono']
+            obj_cliente.fecha_nacimiento = data['fecha_nacimiento']
+            obj_cliente.sexo = data['sexo']
+            obj_cliente.save()
+            mensaje = 'Datos Guardados'
+            
+    return redirect('/cuenta')
+                
