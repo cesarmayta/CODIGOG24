@@ -88,6 +88,7 @@ def crear_usuario(request):
         obj_usuario = User.objects.create_user(username=data_usuario,
                                                password=data_password)
         if obj_usuario is not None:
+            login(request,obj_usuario)
             return redirect('/cuenta')
         
     return render(request,'login.html')
@@ -110,6 +111,10 @@ def login_usuario(request):
             }
         
     return render(request,'login.html',context)
+
+def logout_usuario(request):
+    logout(request)
+    return redirect('/')
 
 @login_required(login_url='/login')
 def cuenta_usuario(request):

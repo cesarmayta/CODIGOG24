@@ -13,5 +13,6 @@ urlpatterns = [
     path('carrito/clear',views.limpiar_carrito,name='limpiarcarrito'),
     path('usuario/add',views.crear_usuario,name='crearusuario'),
     path('cuenta',views.cuenta_usuario,name='cuentausuario'),
-    path('login',views.login_usuario,name='loginusuario')
+    path('login',views.login_usuario,name='loginusuario'),
+    path('logout',views.logout_usuario,name='logoutusuario')
 ]
