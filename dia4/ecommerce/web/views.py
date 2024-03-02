@@ -93,7 +93,23 @@ def crear_usuario(request):
     return render(request,'login.html')
 
 def login_usuario(request):
-    return render(request,'login.html')
+    context = {}
+    if request.method == "POST":
+        data_usuario = request.POST['login_usuario']
+        data_password = request.POST['login_password']
+        
+        obj_usuario = authenticate(request,
+                                   username=data_usuario,
+                                   password=data_password)
+        if obj_usuario is not None:
+            login(request,obj_usuario)
+            return redirect('/cuenta')
+        else:
+            context ={
+                'mensajeError':'Datos Incorrectos'
+            }
+        
+    return render(request,'login.html',context)
 
 @login_required(login_url='/login')
 def cuenta_usuario(request):
