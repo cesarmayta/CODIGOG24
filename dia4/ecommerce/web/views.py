@@ -77,6 +77,8 @@ def limpiar_carrito(request):
 ########### USUARIO Y CLIENTE #########
 from django.contrib.auth.models import User
 from .models import Cliente
+from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required
 
 def crear_usuario(request):
     if request.method == "POST":
@@ -85,6 +87,14 @@ def crear_usuario(request):
         
         obj_usuario = User.objects.create_user(username=data_usuario,
                                                password=data_password)
+        if obj_usuario is not None:
+            return redirect('/cuenta')
         
-        print("usuario creado...")
     return render(request,'login.html')
+
+def login_usuario(request):
+    return render(request,'login.html')
+
+@login_required(login_url='/login')
+def cuenta_usuario(request):
+    return render(request,'cuenta.html')
