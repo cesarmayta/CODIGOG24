@@ -74,9 +74,8 @@ def limpiar_carrito(request):
     
     return render(request,'carrito.html')
 
-########### USUARIO Y CLIENTE #########
+########### USUARIO Y LOGIN #########
 from django.contrib.auth.models import User
-from .models import Cliente
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 
@@ -116,6 +115,14 @@ def logout_usuario(request):
     logout(request)
     return redirect('/')
 
+############ CLIENTE ############
+from .models import Cliente
+from .forms import ClienteForm
+
 @login_required(login_url='/login')
 def cuenta_usuario(request):
-    return render(request,'cuenta.html')
+    form_cliente = ClienteForm()
+    context = {
+        'frm_cliente':form_cliente
+    }
+    return render(request,'cuenta.html',context)

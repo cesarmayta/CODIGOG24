@@ -7,9 +7,10 @@
         <div class="auth-wrap">
             <div class="auth-col">
                 <h2>Datos Personales</h2>
-            </div>
-            <div class="auth-col">
-                <h2>Información de Contacto</h2>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {{frm_cliente}}
+                </form>
             </div>
         </div>
         </div>
