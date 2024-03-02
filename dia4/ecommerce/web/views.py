@@ -73,3 +73,7 @@ def limpiar_carrito(request):
     carrito.clear()
     
     return render(request,'carrito.html')
+
+########### USUARIO Y CLIENTE #########
+def crear_usuario(request):
+    return render(request,'login.html')
