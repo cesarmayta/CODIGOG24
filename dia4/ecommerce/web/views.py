@@ -121,7 +121,38 @@ from .forms import ClienteForm
 
 @login_required(login_url='/login')
 def cuenta_usuario(request):
-    form_cliente = ClienteForm()
+    data = {}
+    
+    if request.user.first_name != '':
+        data.update({'nombre':request.user.first_name})
+        
+    if request.user.last_name != '':
+        data.update({'apellidos':request.user.last_name})
+    
+    data.update({'email':request.user.username})
+    
+    ### cargamos datos cliente
+    try:
+        obj_cliente = Cliente.objects.get(usuario=request.user)
+        data_cliente = {
+            'direccion':obj_cliente.direccion,
+            'telefono':obj_cliente.telefono,
+            'dni':obj_cliente.dni,
+            'fecha_nacimiento':obj_cliente.fecha_nacimiento,
+            'sexo':obj_cliente.sexo
+        }
+    except:
+        data_cliente = {
+            'direccion':'',
+            'telefono':'',
+            'dni':'',
+            'fecha_nacimiento':'',
+            'sexo':'M'
+        }
+    
+    data.update(data_cliente)
+    
+    form_cliente = ClienteForm(data)
     context = {
         'frm_cliente':form_cliente
     }
