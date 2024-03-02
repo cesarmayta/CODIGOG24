@@ -2,3 +2,5 @@ django==4.2
 pillow
 django-admin-tailwind
 django-ckeditor
+django-crispy-forms
+crispy-bootstrap4
