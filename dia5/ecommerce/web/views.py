@@ -186,4 +186,25 @@ def actualizar_cliente(request):
             mensaje = 'Datos Guardados'
             
     return redirect('/cuenta')
-                
+
+#### PEDIDO ######
+from .models import Pedido,PedidoDetalle
+
+@login_required(login_url='/login')
+def registrar_pedido(request):
+    data_cliente = {}
+    
+    data_usuario = {
+        'nombre':request.user.first_name,
+        'apellidos':request.user.last_name,
+        'email':request.user.email
+    }
+    
+    data_cliente.update(data_usuario)
+    
+    
+    form_cliente = ClienteForm(data_cliente)
+    context = {
+        'frm_cliente':form_cliente
+    }
+    return render(request,'pedido.html',context)
