@@ -4,3 +4,4 @@ django-admin-tailwind
 django-ckeditor
 django-crispy-forms
 crispy-bootstrap4
+django-paypal

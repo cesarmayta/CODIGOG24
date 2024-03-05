@@ -291,3 +291,25 @@ def registrar_pedido(request):
         }
         
         return render(request,'pago.html',context)
+    
+from django.urls import reverse
+from paypal.standard.forms import PayPalPaymentsForm
+
+def view_that_asks_for_money(request):
+
+    # What you want the button to do.
+    paypal_dict = {
+        "business": "sb-e3phq29770596@business.example.com",
+        "amount": "100.00",
+        "item_name": "name of the item",
+        "invoice": "unique-invoice-id",
+        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+        "return": request.build_absolute_uri(reverse('web:index')),
+        "cancel_return": request.build_absolute_uri(reverse('web:index')),
+        "custom": "premium_plan",  # Custom command to correlate to some function later (optional)
+    }
+
+    # Create the instance.
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {"form": form}
+    return render(request, "payment.html", context)
