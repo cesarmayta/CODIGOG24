@@ -309,9 +309,24 @@ def registrar_pedido(request):
             'frm_paypal':frm_paypal
         }
         
+        request.session['pedido_id'] = obj_pedido.id
+        
         return render(request,'pago.html',context)
     
+@login_required(login_url='/login')
 def gracias(request):
+    paypal_id = request.GET.get('PayerID',None)
+    if paypal_id is not None:
+        pedido_id = request.session.get('pedido_id')
+        pedido = Pedido.objects.get(pk=pedido_id)
+        pedido.estado = '1'
+        pedido.save()
+        
+        request.session['pedido_id'] = None
+        carrito = Cart(request)
+        carrito.clear()
+        
+    
     return render(request,'gracias.html')
     
 
