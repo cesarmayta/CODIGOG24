@@ -238,6 +238,10 @@ def pedido(request):
     }
     return render(request,'pedido.html',context)
 
+
+from django.urls import reverse
+from paypal.standard.forms import PayPalPaymentsForm
+
 @login_required(login_url='/login')
 def registrar_pedido(request):
     if request.method == "POST":
@@ -286,14 +290,31 @@ def registrar_pedido(request):
             obj_pedido_detalle.subtotal = float(value['subtotal'])
             obj_pedido_detalle.save()
             
+        ### crear boton paypal
+        
+        paypal_dict = {
+        "business": "sb-e3phq29770596@business.example.com",
+        "amount": monto_total,
+        "item_name": "PEDIDO NRO : " + obj_pedido.nro_pedido,
+        "invoice": obj_pedido.id,
+        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+        "return": request.build_absolute_uri(reverse('web:gracias')),
+        "cancel_return": request.build_absolute_uri(reverse('web:index')),
+        }
+
+        # Create the instance.
+        frm_paypal = PayPalPaymentsForm(initial=paypal_dict)
         context = {
-            'pedido':obj_pedido
+            'pedido':obj_pedido,
+            'frm_paypal':frm_paypal
         }
         
         return render(request,'pago.html',context)
     
-from django.urls import reverse
-from paypal.standard.forms import PayPalPaymentsForm
+def gracias(request):
+    return render(request,'gracias.html')
+    
+
 
 def view_that_asks_for_money(request):
 
