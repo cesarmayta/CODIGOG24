@@ -93,16 +93,25 @@ def crear_usuario(request):
     return render(request,'login.html')
 
 def login_usuario(request):
-    context = {}
+    
+    pagina_destino = request.GET.get('next',None)
+    context = {
+        'destino':pagina_destino
+    }
     if request.method == "POST":
         data_usuario = request.POST['login_usuario']
         data_password = request.POST['login_password']
+        data_destino = request.POST['destino']
         
         obj_usuario = authenticate(request,
                                    username=data_usuario,
                                    password=data_password)
         if obj_usuario is not None:
             login(request,obj_usuario)
+            
+            if data_destino != 'None':
+                return redirect(data_destino)
+            
             return redirect('/cuenta')
         else:
             context ={
