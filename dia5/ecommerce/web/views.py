@@ -200,20 +200,94 @@ def actualizar_cliente(request):
 from .models import Pedido,PedidoDetalle
 
 @login_required(login_url='/login')
-def registrar_pedido(request):
-    data_cliente = {}
+def pedido(request):
+    data = {}
     
-    data_usuario = {
-        'nombre':request.user.first_name,
-        'apellidos':request.user.last_name,
-        'email':request.user.email
-    }
+    if request.user.first_name != '':
+        data.update({'nombre':request.user.first_name})
+        
+    if request.user.last_name != '':
+        data.update({'apellidos':request.user.last_name})
     
-    data_cliente.update(data_usuario)
+    data.update({'email':request.user.username})
     
+    ### cargamos datos cliente
+    try:
+        obj_cliente = Cliente.objects.get(usuario=request.user)
+        data_cliente = {
+            'direccion':obj_cliente.direccion,
+            'telefono':obj_cliente.telefono,
+            'dni':obj_cliente.dni,
+            'fecha_nacimiento':obj_cliente.fecha_nacimiento,
+            'sexo':obj_cliente.sexo
+        }
+    except:
+        data_cliente = {
+            'direccion':'',
+            'telefono':'',
+            'dni':'',
+            'fecha_nacimiento':'',
+            'sexo':'M'
+        }
     
-    form_cliente = ClienteForm(data_cliente)
+    data.update(data_cliente)
+    
+    form_cliente = ClienteForm(data)
     context = {
         'frm_cliente':form_cliente
     }
     return render(request,'pedido.html',context)
+
+@login_required(login_url='/login')
+def registrar_pedido(request):
+    if request.method == "POST":
+        frm_cliente = ClienteForm(request.POST)
+        if frm_cliente.is_valid():
+            data = frm_cliente.cleaned_data
+            
+            #actualizamos usuario
+            obj_usuario = User.objects.get(pk=request.user.id)
+            obj_usuario.first_name = data['nombre']
+            obj_usuario.last_name = data['apellidos']
+            obj_usuario.email = data['email']
+            obj_usuario.save()
+            
+            try:
+                obj_cliente = Cliente.objects.get(usuario=obj_usuario)
+            except:
+                obj_cliente = Cliente()
+                obj_cliente.usuario = obj_usuario
+                
+            obj_cliente.dni = data['dni']
+            obj_cliente.direccion = data['direccion']
+            obj_cliente.telefono = data['telefono']
+            obj_cliente.fecha_nacimiento = data['fecha_nacimiento']
+            obj_cliente.sexo = data['sexo']
+            obj_cliente.save()
+        
+        #registramos pedido
+        
+        monto_total = float(request.session.get('cart_total'))
+        obj_pedido = Pedido()
+        obj_pedido.cliente = obj_cliente
+        obj_pedido.save()
+        nro_pedido = 'PED' + obj_pedido.fecha_registro.strftime('%Y') + str(obj_pedido.id)
+        obj_pedido.nro_pedido = nro_pedido
+        obj_pedido.save()
+        
+        #registramos pedido detalle
+        carrito = request.session.get('cart')
+        for key,value in carrito.items():
+            obj_producto = Producto.objects.get(pk=value['producto_id'])
+            obj_pedido_detalle = PedidoDetalle()
+            obj_pedido_detalle.pedido = obj_pedido
+            obj_pedido_detalle.producto = obj_producto
+            obj_pedido_detalle.cantidad = int(value['cantidad'])
+            obj_pedido_detalle.subtotal = float(value['subtotal'])
+            obj_pedido_detalle.save()
+            
+        context = {
+            'pedido':obj_pedido
+        }
+        
+        return render(request,'pago.html',context)
