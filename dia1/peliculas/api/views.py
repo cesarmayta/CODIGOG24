@@ -13,6 +13,7 @@ def index(request):
     
     return Response(context)
 
+#################### api con django puro 
 def pelicula(request):
     lista_peliculas = Pelicula.objects.all()
     
@@ -51,3 +52,19 @@ def registrar_pelicula(request):
     }
     
     return JsonResponse(context)
+
+######## api con drf #################
+from .serializers import PeliculaSerializer
+
+@api_view(['GET','POST'])
+def pelicula_drf(request):
+    if request.method == "GET":
+        lista_peliculas = Pelicula.objects.all()
+        serializer = PeliculaSerializer(lista_peliculas,many=True)
+        
+        context = {
+            'status':True,
+            'content':serializer.data
+        }
+        
+    return Response(context)
