@@ -18,3 +18,25 @@ def pelicula(request):
     }
     
     return JsonResponse(context)
+
+import json
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def registrar_pelicula(request):
+    json_data = json.loads(request.body)
+    
+    titulo = json_data['titulo']
+    imagen = json_data['imagen']
+    
+    obj_pelicula = Pelicula.objects.create(
+        titulo=titulo,
+        imagen=imagen
+    )
+    
+    context = {
+        'status':True,
+        'message':'pelicula registrada'
+    }
+    
+    return JsonResponse(context)
