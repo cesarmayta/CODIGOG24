@@ -15,6 +15,16 @@ class IndexView(APIView):
     
 class TareaView(APIView):
     
+    def get(self,request):
+        data = Tarea.objects.all()
+        serializer = TareaSerializer(data,many=True)
+        context = {
+            'status':True,
+            'content':serializer.data
+        }
+        
+        return Response(context)
+    
     def post(self,request):
         serializer = TareaSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
