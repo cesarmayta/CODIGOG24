@@ -1,13 +1,17 @@
 from django.http import JsonResponse
 from .models import Pelicula
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view(['GET'])
 def index(request):
     context = {
         'status':True,
         'message':'mi primer api rest con django'
     }
     
-    return JsonResponse(context)
+    return Response(context)
 
 def pelicula(request):
     lista_peliculas = Pelicula.objects.all()
