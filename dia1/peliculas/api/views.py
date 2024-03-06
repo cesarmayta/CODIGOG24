@@ -34,9 +34,16 @@ def registrar_pelicula(request):
         imagen=imagen
     )
     
+    dic_curso = {
+        'id':obj_pelicula.id,
+        'titulo':obj_pelicula.titulo,
+        'imagen':obj_pelicula.imagen
+    }
+    
     context = {
         'status':True,
-        'message':'pelicula registrada'
+        'message':'pelicula registrada',
+        'content':dic_curso
     }
     
     return JsonResponse(context)
