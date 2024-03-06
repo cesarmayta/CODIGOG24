@@ -66,5 +66,15 @@ def pelicula_drf(request):
             'status':True,
             'content':serializer.data
         }
+    elif request.method ==  'POST':
+        serializer = PeliculaSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        obj_pelicula = serializer.save()
+        
+        context = {
+            'status':True,
+            'content':PeliculaSerializer(obj_pelicula).data
+        }
         
     return Response(context)
