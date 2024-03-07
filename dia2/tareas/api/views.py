@@ -37,6 +37,7 @@ class TareaView(APIView):
     
 
 from django.http import Http404
+from rest_framework import status
 
 class TareaDetailView(APIView):
     
@@ -50,5 +51,18 @@ class TareaDetailView(APIView):
         data = self.get_object(pk)
         serializer = TareaSerializer(data)
         return Response(serializer.data)
+    
+    def put(self,request,pk):
+        data = self.get_object(pk)
+        serializer = TareaSerializer(data,data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            context = {
+                'status':True,
+                'content':serializer.data
+            }
+            return Response(serializer.data)
+        
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
             
