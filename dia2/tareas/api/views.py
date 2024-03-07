@@ -34,3 +34,21 @@ class TareaView(APIView):
             'content':serializer.data
         }
         return Response(context)
+    
+
+from django.http import Http404
+
+class TareaDetailView(APIView):
+    
+    def get_object(self,pk):
+        try:
+            return Tarea.objects.get(pk=pk)
+        except:
+            raise Http404
+        
+    def get(self,request,pk):
+        data = self.get_object(pk)
+        serializer = TareaSerializer(data)
+        return Response(serializer.data)
+    
+            
