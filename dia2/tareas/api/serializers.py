@@ -6,6 +6,11 @@ class TareaSerializer(serializers.ModelSerializer):
         model = Tarea
         fields = '__all__'
         
+    def to_representation(self,instance):
+        representation = super().to_representation(instance)
+        representation['estado'] = instance.estado.nombre
+        return representation
+        
 class EstadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estado
