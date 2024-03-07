@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
 from .models import (
-    Categoria,Mesa
+    Categoria,Mesa,
+    Plato
 )
 
 class CategoriaSerializer(serializers.ModelSerializer):
@@ -13,3 +14,15 @@ class MesaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mesa
         fields = '__all__'
+        
+class PlatoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Plato
+        fields = '__all__'
+        
+    def to_representation(self,instance):
+        representation = super().to_representation(instance)
+        representation['plato_img'] = instance.plato_img.url
+        representation['categoria_nom'] = instance.categoria_id.categoria_nom
+        return representation
+        
