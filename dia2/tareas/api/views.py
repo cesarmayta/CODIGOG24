@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Tarea
-from .serializers import TareaSerializer
+from .models import Tarea,Estado
+from .serializers import TareaSerializer,EstadoSerializer
 
 class IndexView(APIView):
     
