@@ -8,7 +8,8 @@ from .models import (
 from .serializers import (
     CategoriaSerializer,
     MesaSerializer,
-    PlatoSerializer
+    PlatoSerializer,
+    CategoriaPlatoSerializer
 )
 
 class CategoriaView(generics.ListCreateAPIView):
@@ -22,5 +23,10 @@ class MesaView(generics.ListCreateAPIView):
 class PlatoView(generics.ListAPIView):
     queryset = Plato.objects.all()
     serializer_class = PlatoSerializer
+    
+class CategoriaPlatoView(generics.RetrieveAPIView):
+    queryset = Categoria.objects.all()
+    lookup_url_kwarg = 'categoria_id'
+    serializer_class = CategoriaPlatoSerializer
     
     
