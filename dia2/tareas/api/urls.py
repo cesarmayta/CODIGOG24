@@ -5,6 +5,6 @@ from . import views
 urlpatterns = [
     path('', views.IndexView.as_view()),
     path('tarea',views.TareaView.as_view()),
-    path('tarea/<int:pk>',views.TareaDetailView.as_view())
-    
+    path('tarea/<int:pk>',views.TareaDetailView.as_view()),
+    path('estado',views.EstadoView.as_view())   
 ]

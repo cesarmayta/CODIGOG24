@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Tarea
+from .models import Tarea,Estado
 
 class TareaSerializer(serializers.ModelSerializer):
     class Meta:

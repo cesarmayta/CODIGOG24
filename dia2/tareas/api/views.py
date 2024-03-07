@@ -70,3 +70,16 @@ class TareaDetailView(APIView):
         data.delete()
         
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class EstadoView(APIView):
+    
+    def get(self,request):
+        data = Estado.objects.all()
+        serializer = EstadoSerializer(data,many=True)
+        return Response(serializer.data)
+    
+    def post(self,request):
+        serializer = EstadoSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
