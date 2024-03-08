@@ -13,7 +13,8 @@ from .serializers import (
     MesaSerializer,
     PlatoSerializer,
     CategoriaPlatoSerializer,
-    PedidoSerializerPOST
+    PedidoSerializerPOST,
+    PedidoSerializerGET
 )
 
 class CategoriaView(generics.ListCreateAPIView):
@@ -63,9 +64,14 @@ class UploadPlatoImgView(APIView):
         
         return Response(context)
     
-class PedidoRegisterView(generics.CreateAPIView):
+class PedidoRegisterView(generics.ListCreateAPIView):
     queryset = Pedido.objects.all()
-    serializer_class = PedidoSerializerPOST
+    #serializer_class = PedidoSerializerPOST
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return PedidoSerializerGET
+        else:
+            return PedidoSerializerPOST
     
 
     
