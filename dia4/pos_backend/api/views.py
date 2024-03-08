@@ -4,14 +4,16 @@ from rest_framework.response import Response
 
 from .models import (
     Mesa,Categoria,
-    Plato
+    Plato,
+    Pedido
 )
 
 from .serializers import (
     CategoriaSerializer,
     MesaSerializer,
     PlatoSerializer,
-    CategoriaPlatoSerializer
+    CategoriaPlatoSerializer,
+    PedidoSerializerPOST
 )
 
 class CategoriaView(generics.ListCreateAPIView):
@@ -60,5 +62,11 @@ class UploadPlatoImgView(APIView):
         }
         
         return Response(context)
+    
+class PedidoRegisterView(generics.CreateAPIView):
+    queryset = Pedido.objects.all()
+    serializer_class = PedidoSerializerPOST
+    
+
     
     

@@ -43,7 +43,7 @@ class PedidoSerializerPOST(serializers.ModelSerializer):
     
     class Meta:
         model = Pedido
-        fields = ['pedido_fecha','pedido_estad','usu_id',
+        fields = ['pedido_fecha','pedido_estado','usu_id',
                   'mesa_id','pedidoplatos']
         
     def create(self,validated_data):
