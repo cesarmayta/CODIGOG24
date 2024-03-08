@@ -1,4 +1,5 @@
 import logo from '../../../assets/logo.svg';
+import search from '../../../assets/search.svg';
 
 const PosHeader = () =>{
     return(
@@ -7,7 +8,7 @@ const PosHeader = () =>{
             <img src={logo} alt="" />
             </div>
             <div className="header__buscador">
-            <img src="./img/search.svg" alt="" />
+            <img src={search} alt="" />
             <input type="text" className="header__input" placeholder="Busca un término" />
             </div>
             <div className="header__usuario">
