@@ -44,3 +44,45 @@ class Plato(models.Model):
         
     def __str__(self):
         return self.plato_nom
+    
+from django.contrib.auth.models import User
+class Pedido(models.Model):
+    ESTADO_CHOICES = (
+        ('1','solicitado'),
+        ('2','Pagado')
+    )
+    
+    pedido_id = models.AutoField(primary_key=True)
+    pedido_fecha = models.DateTimeField(auto_now=True)
+    pedido_estado = models.CharField(max_length=1,
+                                     default=1,
+                                     choices=ESTADO_CHOICES)
+    mesa_id = models.ForeignKey(Mesa,to_field='mesa_id',
+                                on_delete=models.RESTRICT,
+                                db_column='mesa_id')
+    usu_id = models.ForeignKey(User,to_field='id',
+                               related_name='Pedidos',
+                               on_delete=models.RESTRICT,
+                               db_column='usu_id')
+    class Meta:
+        db_table = 'tbl_pedido'
+    
+    def __str__(self):
+        return self.mesa_id.mesa_nro
+    
+class PedidoPlato(models.Model):
+    pedidoplato_id = models.AutoField(primary_key=True)
+    pedidoplato_cant = models.IntegerField(default=1)
+    plato_id = models.ForeignKey(Plato,to_field='plato_id',
+                                 db_column='plato_id',
+                                 on_delete=models.RESTRICT)
+    pedido_id = models.ForeignKey(Pedido,related_name='pedidoplatos',
+                                  to_field='pedido_id',db_column='pedido_id',
+                                  on_delete=models.RESTRICT)
+    
+    class Meta:
+        db_table = 'tbl_pedido_plato'
+        
+    def __str__(self):
+        return self.plato_id.plato_nom
+    
