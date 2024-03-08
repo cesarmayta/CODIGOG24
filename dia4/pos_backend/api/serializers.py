@@ -59,6 +59,12 @@ class PedidoPlatoSerializerGET(serializers.ModelSerializer):
         model = PedidoPlato
         fields = ['pedidoplato_id','pedidoplato_cant','plato_id']
         
+    def to_representation(self,instance):
+        representation = super().to_representation(instance)
+        representation['plato_nom'] = instance.plato_id.plato_nom
+        representation['plato_img'] = instance.plato_id.plato_img.url
+        return representation
+        
 class PedidoSerializerGET(serializers.ModelSerializer):
     pedidoplatos = PedidoPlatoSerializerGET(many=True,read_only=True)
     
@@ -66,5 +72,10 @@ class PedidoSerializerGET(serializers.ModelSerializer):
         model = Pedido
         fields = ['pedido_id','pedido_fecha','pedido_estado',
                   'usu_id','mesa_id','pedidoplatos']
+        
+    def to_representation(self,instance):
+        representation = super().to_representation(instance)
+        representation['usu_name'] = instance.usu_id.username
+        return representation
             
         
