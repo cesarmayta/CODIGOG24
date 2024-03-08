@@ -230,7 +230,7 @@ ul {
 }
 .pos-container .tabla .pedido .boleta .comanda {
   background-color: #eee;
-  background: url("./../img/comanda.png") no-repeat;
+  background: url("./../assets/comanda.png") no-repeat;
   background-size: cover;
   border-radius: 15px;
   margin-top: 10px;
