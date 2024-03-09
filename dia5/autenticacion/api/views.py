@@ -40,3 +40,16 @@ class TokenView(APIView):
         }
         
         return Response(context)
+    
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
+class JWTView(APIView):
+    authentacion_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self,request):
+        context = {
+            'usuario':str(request.user)
+        }
+        
+        return Response(context)
