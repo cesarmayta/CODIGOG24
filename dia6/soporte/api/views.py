@@ -1,4 +1,8 @@
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import (
+    JWTAuthentication
+)
 
 from .models import (
     Category,Kind,
@@ -19,6 +23,8 @@ from .serializers import (
 )
 
 class KindViewSet(viewsets.ModelViewSet):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Kind.objects.all()
     serializer_class = KindSerializer
     

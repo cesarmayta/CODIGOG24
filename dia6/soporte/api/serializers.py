@@ -33,6 +33,7 @@ class SubkindSerializer(serializers.ModelSerializer):
         
     def to_representation(self,instance):
         representation = super().to_representation(instance)
+        representation['kind_name'] = instance.kind.name
         return representation
         
 class PrioritySerializer(serializers.ModelSerializer):
