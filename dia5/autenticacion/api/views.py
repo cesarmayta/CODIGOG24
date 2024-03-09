@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from rest_framework.authentication import (
-    BasicAuthentication
+    BasicAuthentication,SessionAuthentication
 )
 
 from rest_framework.permissions import (
@@ -19,7 +19,7 @@ class IndexView(APIView):
         return Response(context)
     
 class UsuarioView(APIView):
-    authentacion_classes = [BasicAuthentication]
+    authentacion_classes = [BasicAuthentication,SessionAuthentication]
     permission_classes = [IsAuthenticated]
     
     def get(self,request):
