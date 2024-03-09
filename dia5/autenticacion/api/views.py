@@ -2,7 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from rest_framework.authentication import (
-    BasicAuthentication,SessionAuthentication
+    BasicAuthentication,SessionAuthentication,
+    TokenAuthentication
 )
 
 from rest_framework.permissions import (
@@ -27,4 +28,15 @@ class UsuarioView(APIView):
             'status':True,
             'usuario':str(request.user)
         }
+        return Response(context)
+    
+class TokenView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self,request):
+        context = {
+            'usuario':str(request.user)
+        }
+        
         return Response(context)
