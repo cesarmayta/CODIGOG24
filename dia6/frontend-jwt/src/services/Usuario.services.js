@@ -3,12 +3,12 @@ import {API_URL} from '../lib/Enviroments'
 
 class UsuarioServices{
     constructor(){
-        this.endpoint = 'auth'
+        this.endpoint = ''
         this.token = ''
     }
 
     login(data){
-        return axios.post(API_URL+"/"+this.endpoint+"/login",data)
+        return axios.post(API_URL+"/login",data)
         .then(res=>{
             return res.data;
         })

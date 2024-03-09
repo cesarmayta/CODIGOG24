@@ -4,7 +4,7 @@ import {useState} from 'react'
 
 const Login = () =>{
     const [userCredentials,setUserCredentials] = useState({
-        email:'',
+        username:'',
         password:''
     })
     const [errorMessage,setErrorMessage] = useState('')
@@ -24,13 +24,15 @@ const Login = () =>{
             UsuarioService.login(userCredentials)
             .then(res=>{
                 console.log(res);
-                if(res.status === true){
-                    localStorage.setItem('token',res.content)
-                    navigate('/')
-                }else{
-                    console.log(res.message)
-                    setErrorMessage(res.message)
-                }
+                localStorage.setItem('token',res.access)
+                navigate('/')
+                // if(res.status === true){
+                //     localStorage.setItem('token',res.access)
+                //     navigate('/')
+                // }else{
+                //     console.log(res.message)
+                //     setErrorMessage(res.message)
+                // }
             })
         }catch{
             console.log("error")
@@ -56,10 +58,10 @@ const Login = () =>{
                                             <form action="mt-3" className="p-2" onSubmit={handlerLogin}>
                                                 <div className="form-group">
                                                     <label for="emailaddress">Email address</label>
-                                                    <input className="form-control" type="email" 
+                                                    <input className="form-control" type="text" 
                                                     id="emailaddress" 
-                                                    required="" placeholder="john@deo.com"
-                                                    name="email"
+                                                    required="" placeholder="admin"
+                                                    name="username"
                                                     onChange={handlerInputChange}
                                                     />
                                                 </div>
