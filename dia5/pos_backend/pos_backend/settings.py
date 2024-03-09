@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'api_auth',
     'rest_framework',
     'cloudinary',
+    'api_admin',
     'rest_framework_simplejwt',
     'django.contrib.admin',
     'django.contrib.auth',
