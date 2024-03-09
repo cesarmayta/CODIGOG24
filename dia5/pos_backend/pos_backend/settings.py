@@ -142,3 +142,7 @@ cloudinary.config(
   api_key = config('CLOUDINARY_API_KEY'), 
   api_secret = config('CLOUDINARY_API_SECRET') 
 )
+
+SIMPLE_JWT = {
+    "TOKEN_OBTAIN_SERIALIZER":"api_auth.serializers.LoginSerializer",
+}
