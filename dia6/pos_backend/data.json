@@ -1,0 +1,172 @@
+[
+    {
+        "model": "api.categoria",
+        "pk": 1,
+        "fields": {
+            "categoria_nom": "ENTRADAS"
+        }
+    },
+    {
+        "model": "api.categoria",
+        "pk": 2,
+        "fields": {
+            "categoria_nom": "PLATOS DE FONDO"
+        }
+    },
+    {
+        "model": "api.categoria",
+        "pk": 3,
+        "fields": {
+            "categoria_nom": "BEBIDAS"
+        }
+    },
+    {
+        "model": "api.mesa",
+        "pk": 1,
+        "fields": {
+            "mesa_nro": "1"
+        }
+    },
+    {
+        "model": "api.mesa",
+        "pk": 2,
+        "fields": {
+            "mesa_nro": "2"
+        }
+    },
+    {
+        "model": "api.mesa",
+        "pk": 3,
+        "fields": {
+            "mesa_nro": "3"
+        }
+    },
+    {
+        "model": "api.mesa",
+        "pk": 4,
+        "fields": {
+            "mesa_nro": "4"
+        }
+    },
+    {
+        "model": "api.mesa",
+        "pk": 5,
+        "fields": {
+            "mesa_nro": "5"
+        }
+    },
+    {
+        "model": "api.mesa",
+        "pk": 6,
+        "fields": {
+            "mesa_nro": "6"
+        }
+    },
+    {
+        "model": "api.mesa",
+        "pk": 7,
+        "fields": {
+            "mesa_nro": "7"
+        }
+    },
+    {
+        "model": "api.plato",
+        "pk": 1,
+        "fields": {
+            "plato_nom": "TEQUENOS",
+            "plato_img": "image/upload/v1709781764/m85c2d7ska30fuuoll96.jpg",
+            "plato_pre": "10.00",
+            "categoria_id": 1
+        }
+    },
+    {
+        "model": "api.plato",
+        "pk": 2,
+        "fields": {
+            "plato_nom": "CEVICHOP",
+            "plato_img": "image/upload/v1709781809/pov5h06iwzwibdydl7lx.jpg",
+            "plato_pre": "15.00",
+            "categoria_id": 1
+        }
+    },
+    {
+        "model": "api.plato",
+        "pk": 3,
+        "fields": {
+            "plato_nom": "CAUSA LIMENA",
+            "plato_img": "image/upload/v1709781825/e4cwajq8qojyzq4xgsqt.jpg",
+            "plato_pre": "15.00",
+            "categoria_id": 1
+        }
+    },
+    {
+        "model": "api.plato",
+        "pk": 4,
+        "fields": {
+            "plato_nom": "LOMO SALTADO",
+            "plato_img": "image/upload/v1709781847/amnd2z1slmhvb6jk0xom.jpg",
+            "plato_pre": "20.00",
+            "categoria_id": 2
+        }
+    },
+    {
+        "model": "api.plato",
+        "pk": 5,
+        "fields": {
+            "plato_nom": "TACU TACU",
+            "plato_img": "image/upload/v1709781860/wt1lmbu9ddkceny2irah.jpg",
+            "plato_pre": "20.00",
+            "categoria_id": 2
+        }
+    },
+    {
+        "model": "api.plato",
+        "pk": 6,
+        "fields": {
+            "plato_nom": "ARROZ CON PATO",
+            "plato_img": "image/upload/v1709781872/b5hjdpxpo6xaf3sy3sas.jpg",
+            "plato_pre": "20.00",
+            "categoria_id": 2
+        }
+    },
+    {
+        "model": "api.plato",
+        "pk": 7,
+        "fields": {
+            "plato_nom": "CUSQUENA TRIGO",
+            "plato_img": "image/upload/v1709781883/oxf1x9cecngkmkqj6hlf.jpg",
+            "plato_pre": "10.00",
+            "categoria_id": 3
+        }
+    },
+    {
+        "model": "api.plato",
+        "pk": 8,
+        "fields": {
+            "plato_nom": "INKA KOLA",
+            "plato_img": "image/upload/v1709781895/iqxav2e9olhmopxjcgra.webp",
+            "plato_pre": "7.00",
+            "categoria_id": 3
+        }
+    },
+    {
+        "model": "api.plato",
+        "pk": 9,
+        "fields": {
+            "plato_nom": "PISCO SOUR",
+            "plato_img": "image/upload/v1709781908/duc1tgnnkcsmcv6gzuwn.jpg",
+            "plato_pre": "20.00",
+            "categoria_id": 3
+        }
+    },
+    {
+        "model": "api.plato",
+        "pk": 10,
+        "fields": {
+            "plato_nom": "Agua San Luis",
+            "plato_img": "image/upload/https://res.cloudinary.com/dnhysyiwk/image/upload/v1709858702/r6h5kwgozauzpeirkzba.jpg",
+            "plato_pre": "5.00",
+            "categoria_id": 3
+        }
+    }
+]
