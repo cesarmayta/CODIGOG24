@@ -7,6 +7,7 @@ function App(){
   const [tareas,setTareas] = useState([]);
   const [nombre,setNombre] = useState('');
   const [estado,setEstado] = useState('pendiente');
+  const [refresh,setRefresh] = useState(false);
 
   useEffect(()=>{
       axios.get('http://localhost:5000/tarea')
@@ -14,7 +15,8 @@ function App(){
         console.log(res.data.content);
         setTareas(res.data.content);
       })
-  },[])
+      setRefresh(false)
+  },[refresh])
 
   function agregarTarea(e){
     e.preventDefault();
@@ -25,8 +27,7 @@ function App(){
 
     axios.post('http://localhost:5000/tarea',data)
     .then(res=>{
-      var temp = tareas;
-      temp.push(res.data.content)
+      setRefresh(true)
       setNombre('');
     }).catch((error)=>{
       console.log(error.toString());
@@ -56,17 +57,16 @@ function App(){
                 <Table className="table mb-4">
                   <thead>
                     <tr>
-                      <th scope="col">Nro.</th>
                       <th scope="col">Tarea</th>
-                      <th scope="col">Acciones</th>
+                      <th scope="col">Estado</th>
                     </tr>
                   </thead>
                   <tbody id="cuerpoTabla">
-                  {tareas.map((alu)=>{
+                  {tareas.map((tarea)=>{
                       return(
                         <tr key={0}>
-                          <td>{alu.descripcion}</td>
-                          <td>{alu.estado}</td>
+                          <td>{tarea.descripcion}</td>
+                          <td>{tarea.estado}</td>
                         </tr>
                       )
                   })}
