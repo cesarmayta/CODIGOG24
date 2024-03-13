@@ -27,4 +27,23 @@ app.get('/tarea',(req,res)=>{
     
 })
 
+app.get('/tarea/:id',(req,res)=>{
+    const {id} = req.params;
+
+    const query = 'select * from tarea where id=?'
+
+    mysqlConnection.query(query,[id],(err,rows,fields)=>{
+        if(!err){
+            context = {
+                'status':true,
+                'content':rows
+            }
+            res.json(context);
+        }
+        else{
+            console.log(err)
+        }
+    })
+})
+
 app.listen(5000,()=>console.log('http://127.0.0.1:5000'))
