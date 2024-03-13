@@ -30,8 +30,27 @@ app.get('/suma/:n1/:n2',(req,res)=>{
 app.post('/calculadora',(req,res)=>{
     n1 = req.body.n1;
     n2 = req.body.n2;
-    resultado = parseInt(n1) + parseInt(n2);
-    res.send(`La suma de ${n1} + ${n2} es ${resultado}`);
+    ope = req.body.ope;
+    switch(ope){
+        case '+':
+            resultado = parseInt(n1) + parseInt(n2);
+            res.send(`La suma de ${n1} + ${n2} es ${resultado}`);
+            break;
+        case '-':
+            resultado = parseInt(n1) - parseInt(n2);
+            res.send(`La resta de ${n1} - ${n2} es ${resultado}`);
+            break;
+        case 'x':
+            resultado = parseInt(n1) * parseInt(n2);
+            res.send(`La multiplicación de ${n1} x ${n2} es ${resultado}`);
+            break;
+        case '/':
+            resultado = parseInt(n1) / parseInt(n2);
+            res.send(`La división de ${n1} / ${n2} es ${resultado}`);
+            break;
+        default:
+            res.send('No se encontro operación');
+    }
 })
 
 app.listen(5000,()=>console.log('servidor en http://127.0.0.1:5000'))
