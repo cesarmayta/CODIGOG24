@@ -88,4 +88,21 @@ app.put('/tarea/:id',(req,res)=>{
         })
 })
 
+app.delete('/tarea/:id',(req,res)=>{
+    const {id} = req.params;
+    const query = 'delete from tarea where id=?'
+    mysqlConnection.query(query,[id],
+        (err,rows,fields)=>{
+            if(!err){
+                context = {
+                    'status':true,
+                    'message':'registro eliminado'
+                }
+                res.json(context)
+            }else{
+                console.log(err);
+            }
+        })
+})
+
 app.listen(5000,()=>console.log('http://127.0.0.1:5000'))
