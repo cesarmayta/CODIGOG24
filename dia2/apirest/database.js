@@ -1,4 +1,4 @@
-const mysql = require('mysql2')
+const mysql = require('mysql2');
 
 const mysqlConnection = mysql.createConnection({
     host:'localhost',
@@ -18,6 +18,7 @@ mysqlConnection.connect(function(err){
 
 module.exports = mysqlConnection
 
-/*mysqlConnection.query('select * from tarea',(err,rows,fields)=>{
+/*
+mysqlConnection.query('select * from tarea',(err,rows,fields)=>{
     console.log(rows);
 })*/
