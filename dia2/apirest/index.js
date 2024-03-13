@@ -66,4 +66,26 @@ app.post('/tarea',(req,res)=>{
     })
 })
 
+app.put('/tarea/:id',(req,res)=>{
+    const {descripcion,estado} = req.body;
+    const {id} = req.params;
+
+    const query = `update tarea set
+                   descripcion=?,estado=?
+                   where id=?`;
+
+    mysqlConnection.query(query,[descripcion,estado,id],
+        (err,rows,fields)=>{
+            if(!err){
+                context = {
+                    'status':true,
+                    'message':'registro actualizado'
+                }
+                res.json(context);
+            }else{
+                console.log(err);
+            }
+        })
+})
+
 app.listen(5000,()=>console.log('http://127.0.0.1:5000'))
