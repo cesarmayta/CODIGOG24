@@ -1,9 +1,10 @@
 const express = require('express')
 const {config} = require('./config')
+const boom = require('@hapi/boom')
 
 
 const categoryApi = require('./routes/category.routes')
-const {errorHandler} = require('./middlewares/error.handler')
+const {errorHandler,boomErrorHandler} = require('./middlewares/error.handler')
 const morgan = require('morgan')
 
 const app = express()
@@ -24,10 +25,15 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/usuario',(req,res)=>{
-    console.log(a + 3)
-    res.json({
+    try{
+        console.log(a + 3)
+        res.json({
         nombre:'cesar'
     })
+    }catch(err){
+        res.status(500).json(boom.badData(`error : ${err.message}`))
+    }
+    
 })
 
 
@@ -37,6 +43,7 @@ categoryApi(app)
 
 //MIDDLEWARES DE ERRORES
 app.use(errorHandler)
+app.use(boomErrorHandler)
 
 app.listen(config.port,
     ()=>console.log(`http://127.0.0.1:${config.port}`))
