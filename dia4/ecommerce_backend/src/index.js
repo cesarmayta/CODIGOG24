@@ -26,12 +26,24 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/usuario',(req,res)=>{
+    console.log(a + 3)
     res.json({
         nombre:'cesar'
     })
 })
 
+
+
 categoryApi(app)
+
+
+//MIDDLEWARES DE ERRORES
+app.use(function(err,req,res,next){
+    console.error(err.stack)
+    res.status(500).json({
+        'message':err.stack
+    })
+})
 
 app.listen(config.port,
     ()=>console.log(`http://127.0.0.1:${config.port}`))
