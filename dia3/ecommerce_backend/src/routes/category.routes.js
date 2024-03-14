@@ -46,6 +46,23 @@ function categoryApi(app){
         }
     })
 
+    router.put('/:id',async function(req,res){
+        const {id} = req.params
+        const {body : data} = req
+        try{
+            const dataUpdated = await objCategory.update({data,id})
+            if(dataUpdated.length > 0){
+                res.status(201).json(dataUpdated[0])
+            }else{
+                res.status(204).json()
+            }
+        }catch(err){
+            res.status(500).json({
+                'error':err
+            })
+        }
+    })
+
 }
 
 module.exports = categoryApi
