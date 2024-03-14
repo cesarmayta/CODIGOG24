@@ -33,6 +33,8 @@ class MysqlLib{
     }
 }
 
-db = new MysqlLib()
-db.querySql('select * from tbl_category')
-.then((result)=>console.log(result))
+module.exports = MysqlLib
+
+// db = new MysqlLib()
+// db.querySql('select * from tbl_category')
+// .then((result)=>console.log(result))
