@@ -2,6 +2,7 @@ const express = require('express')
 const {config} = require('./config')
 
 const categoryApi = require('./routes/category.routes')
+const {errorHandler} = require('./middlewares/error.handler')
 
 const app = express()
 /******** MIDDLEWARES **********/
@@ -38,12 +39,7 @@ categoryApi(app)
 
 
 //MIDDLEWARES DE ERRORES
-app.use(function(err,req,res,next){
-    console.error(err.stack)
-    res.status(500).json({
-        'message':err.stack
-    })
-})
+app.use(errorHandler)
 
 app.listen(config.port,
     ()=>console.log(`http://127.0.0.1:${config.port}`))
