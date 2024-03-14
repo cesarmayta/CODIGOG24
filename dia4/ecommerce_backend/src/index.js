@@ -1,18 +1,15 @@
 const express = require('express')
 const {config} = require('./config')
 
+
 const categoryApi = require('./routes/category.routes')
 const {errorHandler} = require('./middlewares/error.handler')
+const morgan = require('morgan')
 
 const app = express()
 /******** MIDDLEWARES **********/
 app.use(express.json())
-app.use(function(req,res,next){
-    const timeElapsed = Date.now()
-    const today = new Date(timeElapsed)
-    console.log('ejecutado a las ',today.toISOString())
-    next()
-})
+app.use(morgan('combined'))
 
 app.use('/usuario',(req,res,next)=>{
     console.log('tipo de request',req.method)
