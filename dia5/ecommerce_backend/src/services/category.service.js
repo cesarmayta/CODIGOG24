@@ -1,4 +1,5 @@
 const MysqlLib = require('../lib/mysql')
+const {models} = require('../lib/sequelize')
 
 class CategoryService{
 
@@ -7,8 +8,9 @@ class CategoryService{
     }
 
     async getAll(){
-        const query = 'select id,name from tbl_category'
-        const result = await this.db.querySql(query)
+        //const query = 'select id,name from tbl_category'
+        //const result = await this.db.querySql(query)
+        const result = await models.Category.findAll()
         return result
     }
 

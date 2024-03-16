@@ -21,8 +21,7 @@ function categoryApi(app){
     })
 
     router.post('/',
-    validatorHandler(categorySchema,'body')
-    ,async function(req,res){
+    async function(req,res){
         const {body:data} = req
         try{
             const newData = await objCategory.create({data})
