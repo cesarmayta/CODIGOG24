@@ -21,5 +21,17 @@ const Tarea = sequelize.define(
 sequelize.sync()
 .then(()=>{
     console.log("tabla tarea creada")
+    Tarea.bulkCreate(
+        [
+            {
+                descripcion:'tarea uno',
+                estado:'pendiente'
+            },
+            {
+                descripcion:'tarea dos',
+                estado:'terminado'
+            }
+        ]
+    )
 })
 
