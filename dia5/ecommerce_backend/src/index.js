@@ -4,6 +4,7 @@ const boom = require('@hapi/boom')
 
 
 const categoryApi = require('./routes/category.routes')
+const productApi = require('./routes/product.routes')
 const {errorHandler,boomErrorHandler} = require('./middlewares/error.handler')
 const morgan = require('morgan')
 
@@ -39,11 +40,12 @@ app.get('/usuario',(req,res)=>{
 
 
 categoryApi(app)
+productApi(app)
 
 
 //MIDDLEWARES DE ERRORES
-//app.use(errorHandler)
-//app.use(boomErrorHandler)
+app.use(errorHandler)
+app.use(boomErrorHandler)
 
 app.listen(config.port,
     ()=>console.log(`http://127.0.0.1:${config.port}`))
