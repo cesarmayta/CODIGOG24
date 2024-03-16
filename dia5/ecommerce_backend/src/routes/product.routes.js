@@ -39,6 +39,17 @@ function productApi(app){
         }
     })
 
+    router.put('/:id',async function(req,res){
+        try{
+            const {id} = req.params
+            const body = req.body
+            const data = await objProduct.update(id,body)
+            res.status(201).json(data)
+        }catch(err){
+            res.status(500).json(boom.badData(err))
+        }
+    })
+
 }
 
 module.exports = productApi
