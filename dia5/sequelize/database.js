@@ -9,3 +9,17 @@ sequelize.authenticate()
 .then(()=>console.log('conectado a base de datos'))
 .catch(err=>console.log('error : ',err))
 
+//modelos
+const Tarea = sequelize.define(
+    'tarea',
+    {
+        descripcion:Sequelize.STRING,
+        estado:Sequelize.STRING
+    }
+)
+
+sequelize.sync()
+.then(()=>{
+    console.log("tabla tarea creada")
+})
+
