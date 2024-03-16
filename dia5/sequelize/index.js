@@ -30,4 +30,29 @@ app.post('/tarea',(req,res)=>{
     })
 })
 
+app.get('/tarea/:id',(req,res)=>{
+    Tarea.findByPk(req.params.id)
+    .then(function(result){
+        res.json({
+            status:true,
+            content:result
+        })
+    })
+})
+
+app.put('/tarea/:id',(req,res)=>{
+    Tarea.findByPk(req.params.id)
+    .then(function(data){
+        data.update({
+            descripcion:req.body.descripcion,
+            estado:req.body.estado
+        }).then(function(dataUpdated){
+            res.json({
+                status:true,
+                content:dataUpdated
+            })
+        })
+    })
+})
+
 app.listen(5000,()=>console.log('http://localhost:5000'))
