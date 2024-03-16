@@ -36,12 +36,14 @@ function categoryApi(app){
     router.get('/:id',async function(req,res){
         const {id} = req.params
         try{
+            // const data = await objCategory.getById(id)
+            // if(data.length > 0){
+            //     res.status(201).json(data[0])
+            // }else{
+            //     res.status(204).json()
+            // }
             const data = await objCategory.getById(id)
-            if(data.length > 0){
-                res.status(201).json(data[0])
-            }else{
-                res.status(204).json()
-            }
+            res.status(200).json(data)
         }catch(err){
             res.status(500).json({
                 'error':err
