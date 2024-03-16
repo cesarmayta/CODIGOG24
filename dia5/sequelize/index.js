@@ -55,4 +55,13 @@ app.put('/tarea/:id',(req,res)=>{
     })
 })
 
+app.delete('/tarea/:id',(req,res)=>{
+    Tarea.findByPk(req.params.id)
+    .then((tareaDel)=>{
+        tareaDel.destroy()
+    }).then(()=>{
+        res.sendStatus(201)
+    })
+})
+
 app.listen(5000,()=>console.log('http://localhost:5000'))
