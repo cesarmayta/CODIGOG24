@@ -42,8 +42,8 @@ categoryApi(app)
 
 
 //MIDDLEWARES DE ERRORES
-app.use(errorHandler)
-app.use(boomErrorHandler)
+//app.use(errorHandler)
+//app.use(boomErrorHandler)
 
 app.listen(config.port,
     ()=>console.log(`http://127.0.0.1:${config.port}`))
