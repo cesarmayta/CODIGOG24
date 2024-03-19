@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import router from './router/Router'
 import { RouterProvider } from 'react-router-dom'
+import { CartProvider } from './context/CartContext'
 
 import './assets/css/bootstrap.css'
 import './assets/css/chosen.css'
@@ -12,5 +13,7 @@ import './assets/css/media.css'
 import './assets/css/style.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+  <CartProvider>
+    <RouterProvider router={router} />
+  </CartProvider>
 )

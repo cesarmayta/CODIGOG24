@@ -1,5 +1,15 @@
+import { CartContext } from '../context/CartContext'
+import { useContext } from "react"
+
+
+
 const ProductCard = ({ product }) => {
+    const {dispatch} = useContext(CartContext)
     const { image, name, id, price, description} = product
+
+    const addToCart = () =>{
+      dispatch({type:"ADD",payload: product})
+    }
 
     return (
         <article className="cf-sm-6 cf-md-6 cf-lg-6 col-xs-6 col-sm-6 col-md-6 col-lg-6 sectgl-item">
@@ -17,7 +27,9 @@ const ProductCard = ({ product }) => {
                                     <a href="#" className="hover-label quick-view"><i className="icon ion-plus"></i><span>Quick View</span></a>
                                   </p>
                                   <p className="prod-i-cart">
-                                    <a href="#" className="hover-label prod-addbtn"><i className="icon ion-android-cart"></i><span>Add to Cart</span></a>
+                                    <a href="#" className="hover-label prod-addbtn"
+                                     onClick={addToCart}
+                                    ><i className="icon ion-android-cart"></i><span>Add to Cart</span></a>
                                   </p>
                                   <p className="prod-li-compare">
                                     <a href="compare.html" className="hover-label prod-li-compare-btn"><span>Compare</span><i className="icon ion-arrow-swap"></i></a>
