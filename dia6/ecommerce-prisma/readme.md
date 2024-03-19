@@ -10,3 +10,6 @@ npm install --save-dev nodemon
 # comandos prisma
 npx prisma init
 npx prisma db pull
+
+# para iniciar prisma
+npx prisma generate
