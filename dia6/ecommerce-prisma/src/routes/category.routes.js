@@ -20,15 +20,18 @@ function categoryApi(app){
         }
     })
 
-    // router.get('/',async function(req,res){
-    //     try{
-
-    //     }catch(err){
-    //         res.status(500).json({
-    //             'error':err
-    //         })
-    //     }
-    // })
+    router.post('/',async function(req,res){
+        try{
+            const newData = await prisma.tbl_category.create({
+                data:req.body
+            })
+            res.status(201).json(newData)
+        }catch(err){
+            res.status(500).json({
+                'error':err
+            })
+        }
+    })
 }
 
 module.exports = categoryApi
