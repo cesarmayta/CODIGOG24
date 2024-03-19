@@ -6,3 +6,7 @@ npm install express prisma @prisma/client dotenv
 
 # paso 3
 npm install --save-dev nodemon
+
+# comandos prisma
+npx prisma init
+npx prisma db pull
