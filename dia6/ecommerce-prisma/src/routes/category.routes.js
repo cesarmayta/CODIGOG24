@@ -63,6 +63,21 @@ function categoryApi(app){
             })
         }
     })
+
+    router.delete('/:id',async (req,res)=>{
+        try{
+            const data = await prisma.tbl_category.delete({
+                where:{
+                    id:parseInt(req.params.id)
+                }
+            })
+            res.sendStatus(201)
+        }catch(err){
+            res.status(500).json({
+                'error':err
+            })
+        }
+    })
 }
 
 module.exports = categoryApi
