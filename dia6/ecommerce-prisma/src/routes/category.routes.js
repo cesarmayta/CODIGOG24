@@ -32,6 +32,21 @@ function categoryApi(app){
             })
         }
     })
+
+    router.get('/:id',async (req,res)=>{
+        try{
+            const data = await prisma.tbl_category.findUnique({
+                where:{
+                    id:parseInt(req.params.id)
+                }
+            })
+            res.status(200).json(data)
+        }catch(err){
+            res.status(500).json({
+                'error':err
+            })
+        }
+    })
 }
 
 module.exports = categoryApi
