@@ -24,4 +24,10 @@ categoryController.getOne = async (req,res)=>{
     res.status(200).json(category)
 }
 
+categoryController.updateOne = async (req,res)=>{
+    await CategoryModel.findByIdAndUpdate(req.params.id,req.body)
+    const category = await CategoryModel.findById(req.params.id)
+    res.status(200).json(category)
+}
+
 module.exports = categoryController
