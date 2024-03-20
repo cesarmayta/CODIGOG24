@@ -30,4 +30,9 @@ categoryController.updateOne = async (req,res)=>{
     res.status(200).json(category)
 }
 
+categoryController.deleteOne = async (req,res)=>{
+    await CategoryModel.findByIdAndDelete(req.params.id)
+    res.sendStatus(202)
+}
+
 module.exports = categoryController
