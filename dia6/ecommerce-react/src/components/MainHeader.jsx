@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const MainHeader = () => {
     return (
@@ -92,7 +93,7 @@ const MainHeader = () => {
             <div className="site-header">
 
                 <p className="h-logo">
-                    <a href="index.html"><img src="/img/logo.png" alt="MultiShop"/></a>
+                    <Link to="/" className="button"><img src="/img/logo.png" alt="MultiShop"/></Link>
                 </p><div className="h-shop">
 
                     <form method="get" action="#" className="h-search" id="h-search">
@@ -164,7 +165,7 @@ const MainHeader = () => {
                                     </ul>
                                     <p className="total"><b>Subtotal:</b> $510.00</p>
                                     <p className="buttons">
-                                        <a href="cart.html" className="button">View cart</a>
+                                        <Link to="/cart" className="button">View cart</Link>
                                         <a href="checkout.html" className="button">Checkout</a>
                                     </p>
                                 </div>
