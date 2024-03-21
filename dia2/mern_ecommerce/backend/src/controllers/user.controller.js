@@ -63,4 +63,15 @@ userController.updateOne = async (req,res)=>{
     }
 }
 
+userController.deleteOne = async (req,res) =>{
+    try{
+        await userModel.findByIdAndDelete(req.params.id)
+        res.sendStatus(202)
+    }catch(err){
+        res.status(500).json({
+            message:'error '+err.message
+        })
+    }
+}
+
 module.exports = userController
