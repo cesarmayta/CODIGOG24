@@ -31,4 +31,19 @@ userController.getAll = async (req,res)=>{
     }
 }
 
+userController.getOne = async (req,res)=>{
+    try{
+        const user = await userModel.findById(req.params.id)
+        res.json({
+            id:user._id,
+            email:user.email,
+            isAdmin:user.isAdmin
+        })
+    }catch(err){
+        res.status(500).json({
+            message:'error '+err.message
+        })
+    }
+}
+
 module.exports = userController
