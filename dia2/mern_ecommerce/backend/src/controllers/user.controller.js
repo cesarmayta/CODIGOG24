@@ -1,11 +1,11 @@
 const userController = {}
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const userModel = require('../models/user.model')
 
 userController.create = async (req,res)=>{
     try{
         const hash = await bcrypt.hash(req.body.password,10)
-        re.body.password = hash
+        req.body.password = hash
         const newUser = new userModel(req.body)
         await newUser.save()
         res.status(201).json({
@@ -13,9 +13,9 @@ userController.create = async (req,res)=>{
             'email':newUser.email
         })
 
-    }catch{
+    }catch(err){
         res.status(500).json({
-            message:'error : ' + err.message
+            message:'error '+err.message
         })
     }
 }
