@@ -46,4 +46,21 @@ userController.getOne = async (req,res)=>{
     }
 }
 
+userController.updateOne = async (req,res)=>{
+    try{
+        const hash = await bcrypt.hash(req.body.password,10)
+        req.body.password = hash
+        await userModel.findByIdAndUpdate(req.params.id,req.body)
+        const user = await userModel.findById(req.params.id)
+        res.status(201).json({
+            'id':user._id,
+            'email':user.email
+        })
+    }catch(err){
+        res.status(500).json({
+            message:'error '+err.message
+        })
+    }
+}
+
 module.exports = userController
