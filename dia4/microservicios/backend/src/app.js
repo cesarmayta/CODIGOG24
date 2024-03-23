@@ -20,7 +20,7 @@ app.get('/',(req,res)=>{
 })
 
 //app.use('/categories',require('./routes/category.route'))
-app.use('/user',require('./routes/user.route'))
+//app.use('/user',require('./routes/user.route'))
 app.use('/products',require('./routes/product.route'))
 
 module.exports = app

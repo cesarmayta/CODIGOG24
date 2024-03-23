@@ -7,6 +7,7 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "devcatalog":"nodemon src/microservices/ms-catalog/index.js",
+    "devusers":"nodemon src/microservices/ms-users/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

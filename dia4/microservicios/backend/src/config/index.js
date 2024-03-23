@@ -11,6 +11,9 @@ const config = {
     },
     mscatalog:{
         port:process.env.MSCATALOG_PORT || 5001
+    },
+    msusers:{
+        port:process.env.MSUSERS_PORT || 5002
     }
 }
 
