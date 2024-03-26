@@ -16,6 +16,7 @@ io.on('connection',(socket)=>{
     socket.on('mensajeCliente',(data)=>{
         console.log(`mensaje de cliente(${socket.id}) : ${data.mensaje}`)
         data.id = socket.id
-        io.emit('mensajeServidor',data)
+        //io.emit('mensajeServidor',data)
+        socket.broadcast.emit('mensajeServidor',data)
     })
 })
