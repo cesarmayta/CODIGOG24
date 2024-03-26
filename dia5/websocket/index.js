@@ -13,4 +13,7 @@ const io = SocketIO(server)
 
 io.on('connection',(socket)=>{
     console.log('nueva conexión con id : ',socket.id)
+    socket.on('mensajeCliente',(data)=>{
+        console.log(`mensaje de cliente(${socket.id}) : ${data.mensaje}`)
+    })
 })
