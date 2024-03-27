@@ -1,0 +1,22 @@
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04-es
+
+#instalando python
+sudo apt update
+sudo apt install python3-pip python3-dev libpq-dev curl
+
+#instalando y configurando postgresql
+sudo apt install postgresql postgresql-contrib
+
+sudo -u postgres psql
+
+CREATE DATABASE ecommerce_g24;
+
+CREATE USER codigo WITH PASSWORD 'codigo2024';
+
+ALTER ROLE myprojectuser SET client_encoding TO 'utf8';
+ALTER ROLE myprojectuser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE myprojectuser SET timezone TO 'UTC';
+
+GRANT ALL PRIVILEGES ON DATABASE myproject TO myprojectuser;
+
+\q
