@@ -107,6 +107,10 @@ sudo cp gunicorn.service /etc/systemd/system/gunicorn.service
 
 sudo cp shop /etc/nginx/sites-available/shop
 
+sudo usermod -a -G ubuntu www-data
+
+sudo chown -R :www-data /home/ubuntu/ecommerce-api-aws/static
+
 sudo systemctl daemon-reload
 sudo systemctl restart gunicorn.socket
 
@@ -133,9 +137,7 @@ para detener gunicorn:
  sudo pkill gunicorn
 
 
-sudo usermod -a -G ubuntu www-data
 
-sudo chown -R :www-data /home/ubuntu/ecommerce-api-aws/static
 
 
 
