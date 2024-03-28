@@ -95,46 +95,20 @@ sudo ln -s /etc/nginx/sites-available/shop /etc/nginx/sites-enabled
 
 sudo nginx -t
 
-sudo systemctl restart nginx
-
-PARA CUANDO HAGO CAMBIOS EN LOS ARCHIVOS DE CONFIGURACIÓN
-
-git pull origin main
-
-sudo cp gunicorn.socket /etc/systemd/system/gunicorn.socket
-
-sudo cp gunicorn.service /etc/systemd/system/gunicorn.service
-
-sudo cp shop /etc/nginx/sites-available/shop
-
 sudo usermod -a -G ubuntu www-data
 
 sudo chown -R :www-data /home/ubuntu/ecommerce-api-aws/static
 
-sudo systemctl daemon-reload
-sudo systemctl restart gunicorn.socket
-
-sudo rm /etc/nginx/sites-enabled/shop
-
-sudo ln -s /etc/nginx/sites-available/shop /etc/nginx/sites-enabled
-
-sudo nginx -t
-
 sudo systemctl restart nginx
 
-para cambiar los permisos a los archivos estaticos
-sudo chown -R root:root /home/ubuntu/ecommerce-api-aws/static/
 
-para ver logs de nginx
-sudo tail -F /var/log/nginx/error.log
 
-para crear variables de entorno en ubuntu
-export CLOUDINARY_CLOUD_NAME=
-export CLOUDINARY_API_KEY=
-export CLOUDINARY_API_SECRET=
 
-para detener gunicorn:
- sudo pkill gunicorn
+
+
+
+
+
 
 
 
